@@ -29,16 +29,18 @@ namespace X.File.Ctrl
         void showImage()
         {
             if (idx < 0 || idx > files.Length - 1) return;
-            var img = Image.FromFile(files[idx]);
-            tsl_file.Text = files[idx].ToLower().Replace(App.cfg.work.ToLower(), "");
+            if (pb_show.Image != null) { pb_show.Image.Dispose(); pb_show.Image = null; System.GC.Collect(); }
+            //var img = Image.FromFile(files[idx]);
+            tsl_file.Text = files[idx].ToLower().Replace(App.cfg.Cp.Work.ToLower(), "");
             pb_show.Tag = files[idx];
-            pb_show.Image = img; //img.Clone() as Image;
-            img.Dispose();
+            pb_show.Image = Image.FromFile(files[idx]); //img; //img.Clone() as Image;
+            //img.Dispose();
             tsl_ct.Text = (idx + 1) + "/" + files.Length;
         }
 
         private void tsb_close_Click(object sender, EventArgs e)
         {
+            if (pb_show.Image != null) pb_show.Image.Dispose();
             Close?.Invoke();
         }
 

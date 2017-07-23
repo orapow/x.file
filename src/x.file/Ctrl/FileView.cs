@@ -104,35 +104,46 @@ namespace X.File.Ctrl
             if (di == null) di = new DirectoryInfo(tsl_dir.Tag.ToString());
 
             tsl_dir.Tag = di.FullName;
-            tsl_dir.Text = "文件夹：" + tsl_dir.Tag.ToString().ToLower().Replace(App.cfg.work.ToLower(), "\\").Replace("\\\\", "\\");
+            tsl_dir.Text = "文件夹：" + tsl_dir.Tag.ToString().ToLower().Replace(App.cfg.Cp.Work.ToLower(), "\\").Replace("\\\\", "\\");
 
             lv_files.Items.Clear();
             lv_files.BeginUpdate();
             if (!di.Exists) return;
             var i = 1;
 
+            if (di.FullName != App.cfg.Cp.Work)
+            {
+                var plvi = new ListViewItem();
+                plvi.ImageKey = "dir";
+                plvi.SubItems.AddRange(new string[] { "0", "文件夹", "", "", "", "", "" });
+                plvi.Tag = di.Parent.FullName;
+                plvi.Text = "...";
+                lv_files.Items.Add(plvi);
+            }
+
             foreach (var d in di.GetDirectories())
             {
                 App.getIcon("dir", d.FullName);
                 var lvi = new ListViewItem();
                 lvi.ImageKey = "dir";
-                if (lv_files.View == View.Details) lvi.SubItems.AddRange(new string[] { i++ + "" + "　　", "文件夹", "", "", d.CreationTime.ToString("yyyy-MM-dd HH:mm"), "" });
+                lvi.SubItems.AddRange(new string[] { i++ + "" + "　　", "文件夹", "", "", "", d.CreationTime.ToString("yyyy-MM-dd HH:mm"), "" });
                 lvi.Tag = d.FullName;
                 lvi.Text = d.Name;
                 lv_files.Items.Add(lvi);
             }
-            var fs = di.GetFiles();
-            if (fs.Length == 0) { lv_files.Columns[3].Width = 0; lv_files.Columns[4].Width = 0; lv_files.Columns[6].Width = 0; }
-            else { lv_files.Columns[6].Width = 120; lv_files.Columns[3].Width = 60; lv_files.Columns[4].Width = 60; }
+            var fs = di.GetFiles("*");
+            if (fs.Length == 0) { lv_files.Columns[3].Width = 0; lv_files.Columns[4].Width = 0; lv_files.Columns[5].Width = 0; }
+            else { lv_files.Columns[3].Width = 1; lv_files.Columns[4].Width = 1; lv_files.Columns[5].Width = 80; }
             var files = new List<ListViewItem>();
             foreach (var f in fs)
             {
+                if (f.Attributes.HasFlag(FileAttributes.System) || f.Attributes.HasFlag(FileAttributes.Hidden)) continue;//去掉隐藏文件
                 App.getIcon(f.Extension, f.FullName);
                 var lvi = new ListViewItem(f.Name.Substring(0, f.Name.LastIndexOf('.')));
                 lvi.Name = f.Name;
                 lvi.Tag = f.FullName;
                 lvi.ImageKey = f.Extension;
-                lvi.SubItems.AddRange(new string[] { i++ + "", f.Extension.ToUpper(), "", getSize(f.Length), f.CreationTime.ToString("yyyy-MM-dd HH:mm"), f.LastWriteTime.ToString("yyyy-MM-dd HH:mm") });
+                lvi.SubItems.AddRange(new string[] { i++ + "", f.Extension.ToUpper(), "", "", getSize(f.Length), f.LastWriteTime.ToString("yyyy-MM-dd HH:mm") });
                 files.Add(lvi);
             }
             lv_files.Items.AddRange(files.ToArray());
@@ -159,7 +170,7 @@ namespace X.File.Ctrl
         private void tsb_up_Click(object sender, EventArgs e)
         {
             var d = tsl_dir.Tag.ToString();
-            if (d.ToLower() == App.cfg.work.ToLower()) return;
+            if (d.ToLower() == App.cfg.Cp.Work.ToLower()) return;
             d = d.Substring(0, d.LastIndexOf("\\"));
             LoadFile(new DirectoryInfo(d));
         }
@@ -194,12 +205,26 @@ namespace X.File.Ctrl
             }
             else
             {
+                var dir = sc.NameSpace(tsl_dir.Tag.ToString());
                 if (e.ColumnIndex == 3 && lv_files.View == View.Details)
                 {
                     if (e.SubItem.Tag == null)
                     {
-                        var dir = sc.NameSpace(tsl_dir.Tag.ToString());
-                        e.SubItem.Tag = e.SubItem.Text = dir.GetDetailsOf(dir.ParseName(e.Item.Text + e.Item.SubItems[2].Text), 27);
+                        var ts = dir.GetDetailsOf(dir.ParseName(e.Item.Text + e.Item.SubItems[2].Text), 27).Replace("时长", "");
+                        if (!string.IsNullOrEmpty(ts)) { e.SubItem.Tag = e.SubItem.Text = ts; if (e.Header.Width == 1) e.Header.Width = 80; }
+                    }
+                }
+                if (e.ColumnIndex == 4 && lv_files.View == View.Details)
+                {
+                    if (e.SubItem.Tag == null)
+                    {
+                        //for (var i = 0; i < 2560; i++) Console.WriteLine(i + "->" + dir.GetDetailsOf(dir.ParseName(e.Item.Text + e.Item.SubItems[2].Text), i));
+                        var w = dir.GetDetailsOf(dir.ParseName(e.Item.Text + e.Item.SubItems[2].Text), 310).Replace("帧宽度", "");
+                        var h = dir.GetDetailsOf(dir.ParseName(e.Item.Text + e.Item.SubItems[2].Text), 308).Replace("帧高度", "");
+                        var rt = "";
+                        if (!string.IsNullOrEmpty(w + h)) rt = w + " x " + h;
+                        else rt = dir.GetDetailsOf(dir.ParseName(e.Item.Text + e.Item.SubItems[2].Text), 31).Replace("分辨率", "");
+                        if (!string.IsNullOrEmpty(rt)) { e.SubItem.Tag = e.SubItem.Text = rt; if (e.Header.Width == 1) e.Header.Width = 80; }
                     }
                 }
                 e.DrawDefault = true;
@@ -258,7 +283,10 @@ namespace X.File.Ctrl
             if (lv_files.SelectedItems.Count == 0) return;
             var fs = new StringBuilder();
             foreach (ListViewItem it in lv_files.SelectedItems)
+            {
+                if (it.Index == 0) continue;
                 fs.Append(it.Tag + "\0");
+            }
             fs.Append("\0");
             if (MessageBox.Show("确认要删除选中项吗？", this.ParentForm.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Warning) != DialogResult.Yes) return;
             copyFile("del", fs.ToString(), 3);
@@ -280,8 +308,13 @@ namespace X.File.Ctrl
             tsmi_use_excelopen.Visible = false;
             tsmi_use_wordopen.Visible = false;
             tsmi_st_play.Enabled = false;
-            tsp_p2.Visible = false;
+            tsmi_use_aud.Visible = false;
+            tsmi_use_copen.Visible = false;
+            tsmi_use_praat.Visible = false;
+            tsmi_use_sol.Visible = false;
+            tsmi_use_yb.Visible = false;
             tsp_p3.Visible = false;
+            tsp_p5.Visible = false;
             #endregion
 
             var items = lv_files.SelectedItems;
@@ -290,15 +323,11 @@ namespace X.File.Ctrl
                 var fs = Clipboard.GetFileDropList();
                 if (fs.Count > 0) tsmi_parse.Enabled = true;
                 else tsb_parse.Enabled = false;
-                tsp_p2.Visible = true;
             }
             else if (items.Count == 1)
             {
                 tsmi_open_in_exp.Visible = true;
-                tsp_p3.Visible = true;
-
                 tsmi_copy.Enabled = tsmi_cut.Enabled = tsmi_rename.Enabled = true;//文件操作
-
                 tsmi_del.Enabled = true;
 
                 var it = items[0];
@@ -306,31 +335,45 @@ namespace X.File.Ctrl
                 if (System.IO.File.Exists(p))
                 {
                     var ext = p.Substring(p.LastIndexOf(".") + 1).ToLower();
-                    string v = "";
-                    if (App.cfg.exts.ContainsKey(ext)) v = App.cfg.exts[ext];
-                    switch (v)
+                    string v = App.cfg.Views.GetViewer(ext);
+                    if (v == "图片" || v == "录音" || v == "视频")
                     {
-                        case "图片":
-                        case "录音":
-                        case "视频":
-                            tsmi_play.Enabled = true;
-                            tsmi_st_play.Enabled = true;
-                            break;
-                        case "表格":
-                            tsmi_use_excelopen.Visible = true;
-                            tsp_p2.Visible = tsmi_open_voc.Visible = tsmi_open_vod.Visible = true;
-                            break;
-                        case "文档":
-                            tsmi_use_wordopen.Visible = true;
-                            tsp_p2.Visible = false;
-                            break;
+                        tsmi_play.Enabled = true;
+                        tsmi_st_play.Enabled = true;
+                        if (v == "录音")
+                        {
+                            tsmi_use_aud.Visible = true;
+                            tsmi_use_praat.Visible = true;
+                        }
+                        else if (v == "视频")
+                        {
+                            tsmi_use_sol.Visible = true;
+                        }
+                        if (v != "图片")
+                        {
+                            tsmi_use_yb.Visible = true;
+                            tsmi_use_copen.Visible = true;
+                            tsp_p5.Visible = true;
+                        }
+                    }
+                    else if (v == "表格")
+                    {
+                        tsmi_use_excelopen.Visible = true;
+                        tsmi_open_voc.Visible = tsmi_open_vod.Visible = true;
+                        tsp_p3.Visible = true;
+                        tsp_p5.Visible = true;
+                    }
+                    else if (v == "文档")
+                    {
+                        tsmi_use_wordopen.Visible = true;
+                        tsp_p3.Visible = true;
+                        tsp_p5.Visible = true;
                     }
                 }
             }
             else
             {
                 tsmi_del.Visible = tsp_p3.Visible = tsmi_copy.Enabled = tsmi_cut.Enabled = true;
-                tsp_p2.Visible = false;
                 tsmi_play.Enabled = true;
                 tsmi_rename.Enabled = false;
                 tsmi_use_excelopen.Visible = false;
@@ -562,6 +605,72 @@ namespace X.File.Ctrl
         private void lv_files_Enter(object sender, EventArgs e)
         {
             LoadFile(null);
+        }
+
+        private void tsmi_use_aud_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(App.cfg.ExApps.Audac)) { MessageBox.Show("Audacity软件未配置。", this.ParentForm.Text); return; }
+
+            if (lv_files.SelectedItems.Count == 0) return;
+            var p = lv_files.SelectedItems[0].Tag.ToString();
+
+            if (!System.IO.File.Exists(p)) MessageBox.Show("文件不存在", this.ParentForm.Text);
+
+            Process.Start(App.cfg.ExApps.Audac.Replace("[file]", p));
+        }
+
+        private void tsmi_use_praat_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(App.cfg.ExApps.Praat)) { MessageBox.Show("Praat软件未配置。", this.ParentForm.Text); return; }
+
+            if (lv_files.SelectedItems.Count == 0) return;
+            var p = lv_files.SelectedItems[0].Tag.ToString();
+
+            if (!System.IO.File.Exists(p)) MessageBox.Show("文件不存在", this.ParentForm.Text);
+
+            Process.Start(App.cfg.ExApps.Praat.Replace("[file]", p));
+        }
+
+        private void tsmi_use_yb_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(App.cfg.ExApps.YuBao)) { MessageBox.Show("语宝标注软件未配置。", this.ParentForm.Text); return; }
+
+            if (lv_files.SelectedItems.Count == 0) return;
+            var p = lv_files.SelectedItems[0].Tag.ToString();
+
+            if (!System.IO.File.Exists(p)) MessageBox.Show("文件不存在", this.ParentForm.Text);
+
+            Process.Start(App.cfg.ExApps.YuBao.Replace("[file]", p));
+        }
+
+        private void tsmi_use_sol_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(App.cfg.ExApps.Solveig)) { MessageBox.Show("SolveigMM软件未配置。", this.ParentForm.Text); return; }
+
+            if (lv_files.SelectedItems.Count == 0) return;
+            var p = lv_files.SelectedItems[0].Tag.ToString();
+
+            if (!System.IO.File.Exists(p)) MessageBox.Show("文件不存在", this.ParentForm.Text);
+
+            Process.Start(App.cfg.ExApps.Solveig.Replace("[file]", p));
+        }
+
+        private void tsmi_use_copen_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(App.cfg.ExApps.YuBao)) { MessageBox.Show("语宝标注软件未配置。", this.ParentForm.Text); return; }
+
+            if (lv_files.SelectedItems.Count == 0) return;
+            var p = lv_files.SelectedItems[0].Tag.ToString();
+
+            if (!System.IO.File.Exists(p)) MessageBox.Show("文件不存在", this.ParentForm.Text);
+
+            var dir = p.Substring(0, p.LastIndexOf('.'));
+            Directory.CreateDirectory(dir);
+            System.IO.File.Move(p, dir + p.Substring(p.LastIndexOf('\\')));
+
+            LoadFile(new DirectoryInfo(dir));
+
+            Process.Start(App.cfg.ExApps.YuBao.Replace("[file]", dir + p.Replace("dir", "")));
         }
     }
 

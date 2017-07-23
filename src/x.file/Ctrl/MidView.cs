@@ -48,7 +48,7 @@ namespace X.File.Ctrl
             vlc_player_.Play();
             totaltime = getTime(vlc_player_.Duration * 1000);
             tb_proc.SetRange(0, (int)(vlc_player_.Duration * 1000));
-            tsl_file.Text = "文件：" + file.ToLower().Replace(App.cfg.work.ToLower(), "");
+            tsl_file.Text = "文件：" + file.ToLower().Replace(App.cfg.Cp.Work.ToLower(), "");
             lb_filename.Text = file.Substring(file.LastIndexOf('\\') + 1);
             tsb_play.Visible = false;
             tsl_ct.Text = (idx + 1) + "/" + files.Length;
@@ -68,13 +68,19 @@ namespace X.File.Ctrl
         string getTime(double sec)
         {
             var t = "" + (sec / 1000.0).ToString(".000");
-            sec /= 1000;
-            if (sec >= 60) { t = (sec % 60).ToString("00") + "." + t; sec /= 60; }
-            else t = "00" + t;
-            if (sec >= 60) { t = (sec % 60).ToString("00") + ":" + t; sec /= 60; }
-            else t = "00:" + t;
-            if (sec >= 60) { t = (sec % 60).ToString("00") + ":" + t; sec /= 60; }
-            else t = "00:" + t;
+            var mt = sec % 1000;
+            sec = (sec - mt) / 1000;
+
+            t = ((int)sec % 60).ToString("00") + ":" + mt; sec /= 60;
+            t = ((int)sec % 60).ToString("00") + ":" + t; sec /= 60;
+            t = ((int)sec % 60).ToString("00") + ":" + t; sec /= 60;
+
+            //if (sec >= 60) { t = (sec % 60).ToString("00") + "." + mt; sec /= 60; }
+            //else t = "00" + t;
+            //if (sec >= 60) { t = (sec % 60).ToString("00") + ":" + t; sec /= 60; }
+            //else t = ((int)sec).ToString("00") + ":" + t;
+            //if (sec >= 60) { t = (sec % 60).ToString("00") + ":" + t; sec /= 60; }
+            //else t = "00:" + (int)sec;
             return t;
         }
 

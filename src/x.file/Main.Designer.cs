@@ -58,10 +58,6 @@
             this.ss_status = new System.Windows.Forms.StatusStrip();
             this.lb_tip = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.文件ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmi_setting = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsmi_exit = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmi_about = new System.Windows.Forms.ToolStripMenuItem();
             this.ms_main = new System.Windows.Forms.MenuStrip();
             this.BottomToolStripPanel = new System.Windows.Forms.ToolStripPanel();
@@ -69,6 +65,8 @@
             this.RightToolStripPanel = new System.Windows.Forms.ToolStripPanel();
             this.LeftToolStripPanel = new System.Windows.Forms.ToolStripPanel();
             this.ContentPanel = new System.Windows.Forms.ToolStripContentPanel();
+            this.tsmi_setting = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmi_quit = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.sp_pan1)).BeginInit();
             this.sp_pan1.Panel1.SuspendLayout();
             this.sp_pan1.Panel2.SuspendLayout();
@@ -383,35 +381,6 @@
             this.lb_tip.Text = "当前工作文件夹：";
             this.lb_tip.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // 文件ToolStripMenuItem
-            // 
-            this.文件ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmi_setting,
-            this.toolStripSeparator2,
-            this.tsmi_exit});
-            this.文件ToolStripMenuItem.Name = "文件ToolStripMenuItem";
-            this.文件ToolStripMenuItem.Size = new System.Drawing.Size(58, 21);
-            this.文件ToolStripMenuItem.Text = "文件(&F)";
-            // 
-            // tsmi_setting
-            // 
-            this.tsmi_setting.Name = "tsmi_setting";
-            this.tsmi_setting.Size = new System.Drawing.Size(115, 22);
-            this.tsmi_setting.Text = "设置(&S)";
-            this.tsmi_setting.Click += new System.EventHandler(this.tsmi_setting_Click);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(112, 6);
-            // 
-            // tsmi_exit
-            // 
-            this.tsmi_exit.Name = "tsmi_exit";
-            this.tsmi_exit.Size = new System.Drawing.Size(115, 22);
-            this.tsmi_exit.Text = "退出(&E)";
-            this.tsmi_exit.Click += new System.EventHandler(this.tsmi_exit_Click);
-            // 
             // tsmi_about
             // 
             this.tsmi_about.Name = "tsmi_about";
@@ -422,8 +391,9 @@
             // ms_main
             // 
             this.ms_main.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.文件ToolStripMenuItem,
-            this.tsmi_about});
+            this.tsmi_setting,
+            this.tsmi_about,
+            this.tsmi_quit});
             this.ms_main.Location = new System.Drawing.Point(0, 0);
             this.ms_main.Name = "ms_main";
             this.ms_main.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -473,6 +443,20 @@
             this.ContentPanel.Margin = new System.Windows.Forms.Padding(0);
             this.ContentPanel.Size = new System.Drawing.Size(555, 499);
             // 
+            // tsmi_setting
+            // 
+            this.tsmi_setting.Name = "tsmi_setting";
+            this.tsmi_setting.Size = new System.Drawing.Size(59, 21);
+            this.tsmi_setting.Text = "设置(&S)";
+            this.tsmi_setting.Click += new System.EventHandler(this.tsmi_setting_Click);
+            // 
+            // tsmi_quit
+            // 
+            this.tsmi_quit.Name = "tsmi_quit";
+            this.tsmi_quit.Size = new System.Drawing.Size(62, 21);
+            this.tsmi_quit.Text = "退出(&Q)";
+            this.tsmi_quit.Click += new System.EventHandler(this.tsmi_exit_Click);
+            // 
             // Main
             // 
             this.AllowDrop = true;
@@ -519,10 +503,6 @@
         private System.Windows.Forms.ToolStripSeparator tsp_p1;
         private System.Windows.Forms.ToolStripMenuItem tsmi_reload;
         private System.Windows.Forms.ToolTip toolTip1;
-        private System.Windows.Forms.ToolStripMenuItem 文件ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem tsmi_setting;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
-        private System.Windows.Forms.ToolStripMenuItem tsmi_exit;
         private System.Windows.Forms.ToolStripMenuItem tsmi_about;
         private System.Windows.Forms.MenuStrip ms_main;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
@@ -550,6 +530,7 @@
         private Ctrl.XlsView xls_View;
         private Ctrl.PicView pic_View;
         private Ctrl.MidView mda_View;
+        private System.Windows.Forms.ToolStripMenuItem tsmi_setting;
+        private System.Windows.Forms.ToolStripMenuItem tsmi_quit;
     }
 }
-

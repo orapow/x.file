@@ -35,24 +35,72 @@ namespace X.File
 
         public class Config
         {
-            /// <summary>
-            /// 工作文件夹
-            /// </summary>
-            public string work { get; set; }
-            /// <summary>
-            /// 当前文件夹
-            /// </summary>
-            public string dir { get; set; }
-            /// <summary>
-            /// 右侧窗口加载路径
-            /// </summary>
-            public string path { get; set; }
-            public Dictionary<string, bool> nds { get; set; }
-            public Dictionary<string, string> exts { get; set; }
+            public View Views { get; set; }
+            public ExApp ExApps { get; set; }
+            public List<Place> Places { get; set; }
+            public Place Cp { get; set; }
+
             public Config()
             {
-                exts = new Dictionary<string, string>();
-                nds = new Dictionary<string, bool>();
+                Places = new List<Place>();
+                Views = new View();
+                ExApps = new ExApp();
+            }
+
+            public class ExApp
+            {
+                public string Audac { get; set; }
+                public string Praat { get; set; }
+                public string YuBao { get; set; }
+                public string Solveig { get; set; }
+            }
+
+            public class View
+            {
+                public string[] Tabs { get; set; }
+                public string[] Docs { get; set; }
+                public string[] Pics { get; set; }
+                public string[] Vods { get; set; }
+                public string[] Vocs { get; set; }
+
+                public string GetViewer(string ext)
+                {
+                    if (Tabs != null && Tabs.Contains(ext)) return "表格";
+                    if (Docs != null && Docs.Contains(ext)) return "文档";
+                    if (Pics != null && Pics.Contains(ext)) return "图片";
+                    if (Vods != null && Vods.Contains(ext)) return "视频";
+                    if (Vocs != null && Vocs.Contains(ext)) return "录音";
+                    return "";
+                }
+            }
+
+            public class Place
+            {
+                /// <summary>
+                /// 地点名称
+                /// </summary>
+                public string Name { get; set; }
+                /// <summary>
+                /// 工作路径
+                /// </summary>
+                public string Work { get; set; }
+                /// <summary>
+                /// 当前目录
+                /// </summary>
+                public string Dir { get; set; }
+                /// <summary>
+                /// 右侧加载路径
+                /// </summary>
+                public string Path { get; set; }
+                public Dictionary<string, bool> Nodes { get; set; }
+                public Place()
+                {
+                    Nodes = new Dictionary<string, bool>();
+                }
+                public override string ToString()
+                {
+                    return Name + "　" + Work;
+                }
             }
         }
 

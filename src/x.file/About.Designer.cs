@@ -76,7 +76,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(40, 16);
             this.label2.TabIndex = 3;
-            this.label2.Text = "V1.3";
+            this.label2.Text = "V1.5";
             // 
             // About
             // 
@@ -90,6 +90,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "About";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "关于软件";
             ((System.ComponentModel.ISupportInitialize)(this.pb_icon)).EndInit();
             this.ResumeLayout(false);

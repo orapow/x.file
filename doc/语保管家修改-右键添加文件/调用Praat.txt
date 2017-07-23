@@ -1,0 +1,1 @@
+http://www.fon.hum.uva.nl/praat/manual/Scripting_8__Controlling_Praat_from_another_program.html

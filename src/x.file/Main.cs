@@ -18,10 +18,10 @@ namespace X.File
         private void Main_Load(object sender, EventArgs e)
         {
             tv_dir.ImageList = App.il20;
-            if (string.IsNullOrEmpty(App.cfg.dir)) rb_tpl.Checked = true;
+            if (string.IsNullOrEmpty(App.cfg.Cp.Dir)) rb_tpl.Checked = true;
             else
             {
-                var d = App.cfg.dir.Substring(App.cfg.dir.LastIndexOf("\\") + 1);
+                var d = App.cfg.Cp.Dir.Substring(App.cfg.Cp.Dir.LastIndexOf("\\") + 1);
                 switch (d)
                 {
                     case "模板表":
@@ -37,20 +37,20 @@ namespace X.File
                         rb_pic.Checked = true;
                         break;
                 }
-                App.cfg.dir = "";
+                App.cfg.Cp.Dir = "";
             }
         }
 
         void InitDir(string root, DirectoryInfo di)
         {
             tv_dir.Nodes.Clear();
-            lb_tip.Text = "当前工作文件夹：" + App.cfg.work;
-            var tn = new TreeNode() { Text = root, Tag = App.cfg.work + "\\" + root };
+            lb_tip.Text = "当前工作文件夹：" + App.cfg.Cp.Work;
+            var tn = new TreeNode() { Text = root, Tag = App.cfg.Cp.Work + "\\" + root };
             tv_dir.Tag = di.FullName;
             tv_dir.Nodes.Add(tn);
             loadDir(di, tn.Nodes);
-            if (App.cfg.nds.ContainsKey(di.FullName.Replace(App.cfg.work, "")) && App.cfg.nds[di.FullName.Replace(App.cfg.work, "")]) tn.Expand();
-            if (string.IsNullOrEmpty(App.cfg.dir)) tv_dir.ExpandAll();
+            if (App.cfg.Cp.Nodes.ContainsKey(di.FullName.Replace(App.cfg.Cp.Work, "")) && App.cfg.Cp.Nodes[di.FullName.Replace(App.cfg.Cp.Work, "")]) tn.Expand();
+            if (string.IsNullOrEmpty(App.cfg.Cp.Dir)) tv_dir.ExpandAll();
         }
 
         void loadDir(DirectoryInfo dir, TreeNodeCollection tns)
@@ -63,10 +63,10 @@ namespace X.File
                     var tn = new TreeNode() { Text = d.Name, Tag = d.FullName };
                     tn.ImageKey = "dir";
                     tn.SelectedImageKey = "dir";
-                    if (d.FullName.Replace(App.cfg.work, "") == App.cfg.path) tv_dir.SelectedNode = tn;
+                    if (d.FullName.Replace(App.cfg.Cp.Work, "") == App.cfg.Cp.Path) tv_dir.SelectedNode = tn;
                     tns.Add(tn);
                     loadDir(d, tn.Nodes);
-                    if (App.cfg.nds.ContainsKey(d.FullName.Replace(App.cfg.work, "")) && App.cfg.nds[d.FullName.Replace(App.cfg.work, "")]) tn.Expand();
+                    if (App.cfg.Cp.Nodes.ContainsKey(d.FullName.Replace(App.cfg.Cp.Work, "")) && App.cfg.Cp.Nodes[d.FullName.Replace(App.cfg.Cp.Work, "")]) tn.Expand();
                     else tn.Collapse();
                 }));
             }
@@ -118,14 +118,8 @@ namespace X.File
         {
             if (string.IsNullOrEmpty(file)) return;
             var ext = file.Substring(file.LastIndexOf('.') + 1).ToLower();
-            if (App.cfg.exts == null || !App.cfg.exts.ContainsKey(ext)) { Process.Start(file); return; }
-            //foreach (Control c in sp_pan2.Panel2.Controls) c.Visible = false;
-            //表格
-            //文档
-            //图片
-            //视频
-            //录音
-            var v = App.cfg.exts[ext];
+
+            var v = App.cfg.Views.GetViewer(ext);
             switch (v)
             {
                 case "文档":
@@ -147,6 +141,8 @@ namespace X.File
                     mda_View.Visible = true;
                     mda_View.PlayFiles(new string[] { file });
                     break;
+                default:
+                    Process.Start(file); return;
             }
             sp_pan2.Panel2Collapsed = false;
         }
@@ -159,8 +155,7 @@ namespace X.File
             foreach (var f in files)
             {
                 var ext = f.Substring(f.LastIndexOf('.') + 1).ToLower();
-                if (App.cfg.exts == null || !App.cfg.exts.ContainsKey(ext)) continue;
-                var v = App.cfg.exts[ext];
+                var v = App.cfg.Views.GetViewer(ext);
                 if (tp == "") tp = v;
                 else if (tp != v) continue;
                 switch (v)
@@ -184,10 +179,10 @@ namespace X.File
         {
             var rb = sender as RadioButton;
             if (!rb.Checked) return;
-            var di = new DirectoryInfo(App.cfg.work + "\\" + rb.Text);
+            var di = new DirectoryInfo(App.cfg.Cp.Work + "\\" + rb.Text);
             InitDir(rb.Text, di);
-            if (string.IsNullOrEmpty(App.cfg.path)) fv_left.LoadFile(di);
-            else { fv_left.LoadFile(new DirectoryInfo(App.cfg.work + "\\" + App.cfg.path)); App.cfg.path = ""; }
+            if (string.IsNullOrEmpty(App.cfg.Cp.Path)) fv_left.LoadFile(di);
+            else { fv_left.LoadFile(new DirectoryInfo(App.cfg.Cp.Work + "\\" + App.cfg.Cp.Path)); App.cfg.Cp.Path = ""; }
         }
 
         private void tsmi_open_in_exp_Click(object sender, EventArgs e)
@@ -222,7 +217,7 @@ namespace X.File
             var p = tn.FullPath;
             p = p.Replace("模板表\\", "");
             p = p.Substring(0, p.LastIndexOf("."));
-            fv_left.LoadFile(new DirectoryInfo(App.cfg.work + "\\视频\\" + p));
+            fv_left.LoadFile(new DirectoryInfo(App.cfg.Cp.Work + "\\视频\\" + p));
         }
 
         private void tsmi_open_voc_Click(object sender, EventArgs e)
@@ -232,7 +227,7 @@ namespace X.File
             var p = tn.FullPath;
             p = p.Replace("模板表\\", "");
             p = p.Substring(0, p.LastIndexOf("."));
-            fv_left.LoadFile(new DirectoryInfo(App.cfg.work + "\\录音\\" + p));
+            fv_left.LoadFile(new DirectoryInfo(App.cfg.Cp.Work + "\\录音\\" + p));
         }
 
         private void tsmi_open_doc_Click(object sender, EventArgs e)
@@ -240,7 +235,7 @@ namespace X.File
             var tn = tv_dir.SelectedNode;
             if (tn == null) return;
             var p = tn.FullPath;
-            p = App.cfg.work + "\\" + p.Replace("视频\\", "模板表\\").Replace("录音\\", "模板表\\");
+            p = App.cfg.Cp.Work + "\\" + p.Replace("视频\\", "模板表\\").Replace("录音\\", "模板表\\");
             if (System.IO.File.Exists(p + ".doc")) Process.Start(p + ".doc");
             else if (System.IO.File.Exists(p + ".docx")) Process.Start(p + ".docx");
             else MessageBox.Show("文件不存在", Text);
@@ -251,7 +246,7 @@ namespace X.File
             var tn = tv_dir.SelectedNode;
             if (tn == null) return;
             var p = tn.FullPath;
-            p = App.cfg.work + "\\" + p.Replace("视频\\", "模板表\\").Replace("录音\\", "模板表\\");
+            p = App.cfg.Cp.Work + "\\" + p.Replace("视频\\", "模板表\\").Replace("录音\\", "模板表\\");
             if (System.IO.File.Exists(p + ".xls") || (System.IO.File.Exists(p + ".xlsx"))) xls_View.LoadTable(p + ".xls");
             else MessageBox.Show("文件不存在", Text);
         }
@@ -278,7 +273,7 @@ namespace X.File
             var tn = tv_dir.SelectedNode;
             if (tn == null) return;
             var p = tn.FullPath;
-            p = App.cfg.work + "\\" + p.Replace("视频\\", "模板表\\").Replace("录音\\", "模板表\\");
+            p = App.cfg.Cp.Work + "\\" + p.Replace("视频\\", "模板表\\").Replace("录音\\", "模板表\\");
             if (System.IO.File.Exists(p)) Process.Start(p);
             else MessageBox.Show("文件不存在", Text);
         }
@@ -288,7 +283,7 @@ namespace X.File
             var tn = tv_dir.SelectedNode;
             if (tn == null) return;
             var p = tn.FullPath;
-            p = App.cfg.work + "\\" + p.Replace("视频\\", "模板表\\").Replace("录音\\", "模板表\\");
+            p = App.cfg.Cp.Work + "\\" + p.Replace("视频\\", "模板表\\").Replace("录音\\", "模板表\\");
             if (System.IO.File.Exists(p)) Process.Start(p);
             else MessageBox.Show("文件不存在", Text);
         }
@@ -300,7 +295,7 @@ namespace X.File
             else if (rb_tpl.Checked) dir = "模板表";
             else if (rb_voc.Checked) dir = "录音";
             else if (rb_vod.Checked) dir = "视频";
-            InitDir(dir, new DirectoryInfo(App.cfg.work + "\\" + dir));
+            InitDir(dir, new DirectoryInfo(App.cfg.Cp.Work + "\\" + dir));
         }
 
         private void tsmi_expall_Click(object sender, EventArgs e)
@@ -336,15 +331,15 @@ namespace X.File
 
         private void Main_FormClosing(object sender, FormClosingEventArgs e)
         {
-            App.cfg.nds = new Dictionary<string, bool>();
-            getNds(tv_dir.Nodes, App.cfg.nds);
+            App.cfg.Cp.Nodes = new Dictionary<string, bool>();
+            getNds(tv_dir.Nodes, App.cfg.Cp.Nodes);
             var tn = tv_dir.SelectedNode;
             if (tn != null)
             {
-                if (System.IO.File.Exists(tn.Tag.ToString())) App.cfg.path = tn.Parent.Tag.ToString().Replace(App.cfg.work, "");
-                else App.cfg.path = tn.Tag.ToString().Replace(App.cfg.work, "");
+                if (System.IO.File.Exists(tn.Tag.ToString())) App.cfg.Cp.Path = tn.Parent.Tag.ToString().Replace(App.cfg.Cp.Work, "");
+                else App.cfg.Cp.Path = tn.Tag.ToString().Replace(App.cfg.Cp.Work, "");
             }
-            App.cfg.dir = tv_dir.Nodes[0].Tag.ToString().Replace(App.cfg.work, "");
+            App.cfg.Cp.Dir = tv_dir.Nodes[0].Tag.ToString().Replace(App.cfg.Cp.Work, "");
             App.SaveConfig();
         }
 
@@ -353,7 +348,7 @@ namespace X.File
             foreach (TreeNode t in tnc)
             {
                 if (System.IO.File.Exists(t.Tag.ToString())) continue;
-                nds.Add(t.Tag.ToString().Replace(App.cfg.work, ""), t.IsExpanded);
+                nds.Add(t.Tag.ToString().Replace(App.cfg.Cp.Work, ""), t.IsExpanded);
                 getNds(t.Nodes, nds);
             }
         }

@@ -24,7 +24,7 @@ namespace X.File.Ctrl
         {
             if (db != null) db.Dispose();
             db = new DB(file);
-            tsl_file.Text = "文件：" + file.ToLower().Replace(App.cfg.work.ToLower(), "");// + (e.Node.Tag + "").Replace(App.cfg.dir, "");
+            tsl_file.Text = "文件：" + file.ToLower().Replace(App.cfg.Cp.Work.ToLower(), "");// + (e.Node.Tag + "").Replace(App.cfg.dir, "");
             var ts = db.LoadTables();
             if (ts == null) return;
             tsd_sheets.DropDownItems.Clear();
