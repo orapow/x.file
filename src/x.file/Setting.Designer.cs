@@ -403,7 +403,7 @@
             this.groupBox4.Size = new System.Drawing.Size(301, 398);
             this.groupBox4.TabIndex = 5;
             this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "方言点管理";
+            this.groupBox4.Text = "采集点管理";
             // 
             // lb_places
             // 

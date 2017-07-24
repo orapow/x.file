@@ -38,7 +38,36 @@ namespace X.File
             public View Views { get; set; }
             public ExApp ExApps { get; set; }
             public List<Place> Places { get; set; }
-            public Place Cp { get; set; }
+            public string CpId { get; set; }
+            [X.Json.JsonIgnore]
+            public Place Cp
+            {
+                get
+                {
+                    if (Places.Count == 0) return null;
+                    var p = Places.FirstOrDefault(o => o.ID == CpId);
+                    if (p == null) p = Places[0];
+                    CpId = p.ID;
+                    return p;
+                }
+            }
+
+            public string AddPlace(Place p)
+            {
+                if (Places.FirstOrDefault(o => o.Name == p.Name) != null) return "";
+                p.ID = Guid.NewGuid().ToString();
+                Places.Add(p);
+                SaveConfig();
+                return p.ID;
+            }
+
+            public void RemovePlace(string id)
+            {
+                var p = Places.FirstOrDefault(o => o.ID == id);
+                if (p == null) return;
+                Places.Remove(p);
+                SaveConfig();
+            }
 
             public Config()
             {
@@ -76,6 +105,7 @@ namespace X.File
 
             public class Place
             {
+                public string ID { get; set; }
                 /// <summary>
                 /// 地点名称
                 /// </summary>

@@ -40,6 +40,8 @@ namespace X.File
 
         private void bt_ok_Click(object sender, EventArgs e)
         {
+            if (lb_places.Items.Count == 0) { MessageBox.Show("请至少添加一个采集点", Text); return; }
+
             DialogResult = DialogResult.OK;
 
             App.cfg.Views.Docs = tb_docs.Text.Split(';');
@@ -70,13 +72,14 @@ namespace X.File
         {
             var pl = new Place();
             if (pl.ShowDialog() != DialogResult.OK) return;
-            lb_places.Items.Add(new App.Config.Place() { Name = pl.PName, Work = pl.PDir });
+            var p = new App.Config.Place() { Name = pl.PName, Work = pl.PDir };
+            lb_places.Items.Add(p);
         }
 
         private void btn_remove_Click(object sender, EventArgs e)
         {
             var it = lb_places.SelectedItem as App.Config.Place;
-            if (it == null) { MessageBox.Show("请选择一个地点"); return; }
+            if (it == null) { MessageBox.Show("请选择一个地点", Text); return; }
             lb_places.Items.Remove(it);
         }
 
@@ -106,7 +109,7 @@ namespace X.File
             var ofd = new OpenFileDialog();
             ofd.Filter = "应用程序|*.exe";
             if (ofd.ShowDialog() != DialogResult.OK) return;
-            tb_app_aud.Text = ofd.FileName + " [file]";
+            tb_app_aud.Text = ofd.FileName;// + " [file]";
         }
 
         private void bt_app_praat_Click(object sender, EventArgs e)
@@ -114,7 +117,7 @@ namespace X.File
             var ofd = new OpenFileDialog();
             ofd.Filter = "应用程序|*.exe";
             if (ofd.ShowDialog() != DialogResult.OK) return;
-            tb_app_praat.Text = ofd.FileName + " [file]";
+            tb_app_praat.Text = ofd.FileName;// + " [file]";
         }
 
         private void bt_app_yb_Click(object sender, EventArgs e)
@@ -122,7 +125,7 @@ namespace X.File
             var ofd = new OpenFileDialog();
             ofd.Filter = "应用程序|*.exe";
             if (ofd.ShowDialog() != DialogResult.OK) return;
-            tb_app_yb.Text = ofd.FileName + " [file]";
+            tb_app_yb.Text = ofd.FileName;// + " [file]";
         }
 
         private void bt_app_sol_Click(object sender, EventArgs e)
@@ -130,7 +133,7 @@ namespace X.File
             var ofd = new OpenFileDialog();
             ofd.Filter = "应用程序|*.exe";
             if (ofd.ShowDialog() != DialogResult.OK) return;
-            tb_app_sol.Text = ofd.FileName + " [file]";
+            tb_app_sol.Text = ofd.FileName;// + " [file]";
         }
     }
 }

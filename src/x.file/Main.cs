@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
+using System.Linq;
 
 namespace X.File
 {
@@ -18,6 +20,13 @@ namespace X.File
         private void Main_Load(object sender, EventArgs e)
         {
             tv_dir.ImageList = App.il20;
+            tssl_pname.Text = App.cfg.Cp.Name;
+            foreach (var p in App.cfg.Places) cb_places.Items.Add(p);
+            cb_places.SelectedIndex = 0;
+        }
+
+        void Init()
+        {
             if (string.IsNullOrEmpty(App.cfg.Cp.Dir)) rb_tpl.Checked = true;
             else
             {
@@ -45,6 +54,7 @@ namespace X.File
         {
             tv_dir.Nodes.Clear();
             lb_tip.Text = "当前工作文件夹：" + App.cfg.Cp.Work;
+            lb_tip.Tag = App.cfg.Cp.Work;
             var tn = new TreeNode() { Text = root, Tag = App.cfg.Cp.Work + "\\" + root };
             tv_dir.Tag = di.FullName;
             tv_dir.Nodes.Add(tn);
@@ -89,7 +99,11 @@ namespace X.File
 
         private void tsmi_setting_Click(object sender, EventArgs e)
         {
-            new Setting().ShowDialog();
+            SaveConfig();
+            if (new Setting().ShowDialog() != DialogResult.OK) return;
+            cb_places.Items.Clear();
+            foreach (var p in App.cfg.Places) cb_places.Items.Add(p);
+            cb_places.SelectedIndex = 0;
         }
 
         private void tv_dir_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
@@ -257,11 +271,6 @@ namespace X.File
             sp_pan2.Panel2Collapsed = true;
         }
 
-        //private void fv_left_FileClick(string file)
-        //{
-        //    preView(file);
-        //}
-
         private void mda_View_Close()
         {
             mda_View.Visible = false;
@@ -320,17 +329,15 @@ namespace X.File
             sp_pan2.Panel2Collapsed = true;
         }
 
-        //private void Main_Activated(object sender, EventArgs e)
-        //{
-        //    //if (string.IsNullOrEmpty(App.cfg.dir))
-        //    //{
-        //    //    tsmi_reload_Click(null, null);
-        //    //    fv_left.LoadFile(null);
-        //    //}
-        //}
-
         private void Main_FormClosing(object sender, FormClosingEventArgs e)
         {
+            SaveConfig();
+        }
+
+        void SaveConfig()
+        {
+            if (lb_tip.Tag != null && App.cfg.Places.FirstOrDefault(o => o.Work == lb_tip.Tag.ToString()) == null) return;
+            if (tv_dir.Nodes.Count == 0) return;
             App.cfg.Cp.Nodes = new Dictionary<string, bool>();
             getNds(tv_dir.Nodes, App.cfg.Cp.Nodes);
             var tn = tv_dir.SelectedNode;
@@ -361,6 +368,40 @@ namespace X.File
         private void mda_View_Playing(string file)
         {
             fv_left.SelectFile(file);
+        }
+
+        private void bt_pl_new_Click(object sender, EventArgs e)
+        {
+            var pl = new Place();
+            if (pl.ShowDialog() != DialogResult.OK) return;
+
+            var p = new App.Config.Place() { Name = pl.PName, Work = pl.PDir };
+            App.cfg.AddPlace(p);
+
+            cb_places.Items.Add(p);
+            cb_places.SelectedItem = p;
+        }
+
+        private void cb_places_SelectedValueChanged(object sender, EventArgs e)
+        {
+            if (cb_places.SelectedIndex < 0) return;
+            var p = cb_places.SelectedItem as App.Config.Place;
+            if (p == null) return;
+
+            SaveConfig();
+            App.cfg.CpId = p.ID;
+
+            rb_tpl.Checked = false;
+            Init();
+        }
+
+        private void cb_places_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            var lb = sender as ComboBox;
+            e.DrawBackground();
+            e.DrawFocusRectangle();
+            if (e.Index < 0) return;
+            e.Graphics.DrawString(lb.Items[e.Index].ToString(), e.Font, new SolidBrush(e.ForeColor), e.Bounds.Left + 5, e.Bounds.Top + 5);
         }
     }
 }

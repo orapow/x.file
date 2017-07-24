@@ -345,15 +345,12 @@ namespace X.File.Ctrl
                             tsmi_use_aud.Visible = true;
                             tsmi_use_praat.Visible = true;
                         }
-                        else if (v == "视频")
-                        {
-                            tsmi_use_sol.Visible = true;
-                        }
                         if (v != "图片")
                         {
                             tsmi_use_yb.Visible = true;
                             tsmi_use_copen.Visible = true;
                             tsp_p5.Visible = true;
+                            tsmi_use_sol.Visible = true;
                         }
                     }
                     else if (v == "表格")
@@ -616,7 +613,7 @@ namespace X.File.Ctrl
 
             if (!System.IO.File.Exists(p)) MessageBox.Show("文件不存在", this.ParentForm.Text);
 
-            Process.Start(App.cfg.ExApps.Audac.Replace("[file]", p));
+            Process.Start(App.cfg.ExApps.Audac.Replace("[file]", ""), p);
         }
 
         private void tsmi_use_praat_Click(object sender, EventArgs e)
