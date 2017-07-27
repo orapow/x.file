@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
@@ -29,6 +30,8 @@ namespace X.File
         {
             if (string.IsNullOrEmpty(tb_name.Text)) { MessageBox.Show("请输入名称", Text); return; }
             if (string.IsNullOrEmpty(tb_dir.Text)) { MessageBox.Show("请选择或输入路径", Text); return; }
+            if (!Directory.Exists(tb_dir.Text + "\\模板表") || !Directory.Exists(tb_dir.Text + "\\视频") || !Directory.Exists(tb_dir.Text + "\\照片") || !Directory.Exists(tb_dir.Text + "\\录音")) { MessageBox.Show(tb_dir.Text + "当前选择目录结构不正确，请重新选择"); return; }
+
             DialogResult = DialogResult.OK;
             PName = tb_name.Text;
             PDir = tb_dir.Text;

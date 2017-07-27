@@ -376,7 +376,9 @@ namespace X.File.Ctrl
                 tsmi_use_excelopen.Visible = false;
                 tsmi_use_wordopen.Visible = false;
                 tsmi_open_voc.Visible = false;
+                tsp_p3.Visible = false;
                 tsmi_open_vod.Visible = false;
+                tsmi_use_aud.Visible = true;
             }
         }
 
@@ -607,59 +609,64 @@ namespace X.File.Ctrl
         private void tsmi_use_aud_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(App.cfg.ExApps.Audac)) { MessageBox.Show("Audacity软件未配置。", this.ParentForm.Text); return; }
+            if (!System.IO.File.Exists(App.cfg.ExApps.Audac)) { MessageBox.Show("Audacity软件配置错误。", this.ParentForm.Text); return; }
 
             if (lv_files.SelectedItems.Count == 0) return;
-            var p = lv_files.SelectedItems[0].Tag.ToString();
+            var files = "";
+            foreach (ListViewItem li in lv_files.SelectedItems)
+                files += li.Tag.ToString() + " ";
 
-            if (!System.IO.File.Exists(p)) MessageBox.Show("文件不存在", this.ParentForm.Text);
-
-            Process.Start(App.cfg.ExApps.Audac.Replace("[file]", ""), p);
+            Process.Start(App.cfg.ExApps.Audac, files.TrimEnd(','));
         }
 
         private void tsmi_use_praat_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(App.cfg.ExApps.Praat)) { MessageBox.Show("Praat软件未配置。", this.ParentForm.Text); return; }
+            if (!System.IO.File.Exists(App.cfg.ExApps.Audac)) { MessageBox.Show("Praat软件配置错误。", this.ParentForm.Text); return; }
 
             if (lv_files.SelectedItems.Count == 0) return;
             var p = lv_files.SelectedItems[0].Tag.ToString();
 
-            if (!System.IO.File.Exists(p)) MessageBox.Show("文件不存在", this.ParentForm.Text);
+            if (!System.IO.File.Exists(p)) { MessageBox.Show("文件不存在", this.ParentForm.Text); return; }
 
-            Process.Start(App.cfg.ExApps.Praat.Replace("[file]", p));
+            Process.Start(App.cfg.ExApps.Praat, "--open " + p);
         }
 
         private void tsmi_use_yb_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(App.cfg.ExApps.YuBao)) { MessageBox.Show("语宝标注软件未配置。", this.ParentForm.Text); return; }
+            if (!System.IO.File.Exists(App.cfg.ExApps.Audac)) { MessageBox.Show("语宝标注软件配置错误。", this.ParentForm.Text); return; }
 
             if (lv_files.SelectedItems.Count == 0) return;
             var p = lv_files.SelectedItems[0].Tag.ToString();
 
-            if (!System.IO.File.Exists(p)) MessageBox.Show("文件不存在", this.ParentForm.Text);
+            if (!System.IO.File.Exists(p)) { MessageBox.Show("文件不存在", this.ParentForm.Text); return; }
 
-            Process.Start(App.cfg.ExApps.YuBao.Replace("[file]", p));
+            Process.Start(App.cfg.ExApps.YuBao, "inplace_open=" + p);
         }
 
         private void tsmi_use_sol_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(App.cfg.ExApps.Solveig)) { MessageBox.Show("SolveigMM软件未配置。", this.ParentForm.Text); return; }
+            if (!System.IO.File.Exists(App.cfg.ExApps.Audac)) { MessageBox.Show("SolveigMM软件配置错误。", this.ParentForm.Text); return; }
 
             if (lv_files.SelectedItems.Count == 0) return;
             var p = lv_files.SelectedItems[0].Tag.ToString();
 
-            if (!System.IO.File.Exists(p)) MessageBox.Show("文件不存在", this.ParentForm.Text);
+            if (!System.IO.File.Exists(p)) { MessageBox.Show("文件不存在", this.ParentForm.Text); return; }
 
-            Process.Start(App.cfg.ExApps.Solveig.Replace("[file]", p));
+            Process.Start(App.cfg.ExApps.Solveig, p);
         }
 
         private void tsmi_use_copen_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(App.cfg.ExApps.YuBao)) { MessageBox.Show("语宝标注软件未配置。", this.ParentForm.Text); return; }
+            if (!System.IO.File.Exists(App.cfg.ExApps.YuBao)) { MessageBox.Show("语宝标注软件配置错误。", this.ParentForm.Text); return; }
 
             if (lv_files.SelectedItems.Count == 0) return;
             var p = lv_files.SelectedItems[0].Tag.ToString();
 
-            if (!System.IO.File.Exists(p)) MessageBox.Show("文件不存在", this.ParentForm.Text);
+            if (!System.IO.File.Exists(p)) { MessageBox.Show("文件不存在", this.ParentForm.Text); return; }
 
             var dir = p.Substring(0, p.LastIndexOf('.'));
             Directory.CreateDirectory(dir);
@@ -667,7 +674,7 @@ namespace X.File.Ctrl
 
             LoadFile(new DirectoryInfo(dir));
 
-            Process.Start(App.cfg.ExApps.YuBao.Replace("[file]", dir + p.Replace("dir", "")));
+            Process.Start(App.cfg.ExApps.YuBao, "inplace_open=" + dir + p.Replace(dir, ""));
         }
     }
 
