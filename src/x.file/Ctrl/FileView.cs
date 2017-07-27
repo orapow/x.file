@@ -111,7 +111,7 @@ namespace X.File.Ctrl
             if (!di.Exists) return;
             var i = 1;
 
-            if (di.FullName != App.cfg.Cp.Work)
+            if (di.FullName.ToLower() != App.cfg.Cp.Work.ToLower())
             {
                 var plvi = new ListViewItem();
                 plvi.ImageKey = "dir";
@@ -351,6 +351,7 @@ namespace X.File.Ctrl
                             tsmi_use_copen.Visible = true;
                             tsp_p5.Visible = true;
                             tsmi_use_sol.Visible = true;
+                            tsmi_use_aud.Visible = true;
                         }
                     }
                     else if (v == "表格")
@@ -378,7 +379,6 @@ namespace X.File.Ctrl
                 tsmi_open_voc.Visible = false;
                 tsp_p3.Visible = false;
                 tsmi_open_vod.Visible = false;
-                tsmi_use_aud.Visible = true;
             }
         }
 
@@ -611,12 +611,17 @@ namespace X.File.Ctrl
             if (string.IsNullOrEmpty(App.cfg.ExApps.Audac)) { MessageBox.Show("Audacity软件未配置。", this.ParentForm.Text); return; }
             if (!System.IO.File.Exists(App.cfg.ExApps.Audac)) { MessageBox.Show("Audacity软件配置错误。", this.ParentForm.Text); return; }
 
-            if (lv_files.SelectedItems.Count == 0) return;
-            var files = "";
-            foreach (ListViewItem li in lv_files.SelectedItems)
-                files += li.Tag.ToString() + " ";
+            //if (lv_files.SelectedItems.Count == 0) return;
+            //var files = "";
+            //foreach (ListViewItem li in lv_files.SelectedItems)
+            //    files += li.Tag.ToString() + ",";
 
-            Process.Start(App.cfg.ExApps.Audac, files.TrimEnd(','));
+            if (lv_files.SelectedItems.Count == 0) return;
+            var p = lv_files.SelectedItems[0].Tag.ToString();
+
+            if (!System.IO.File.Exists(p)) { MessageBox.Show("文件不存在", this.ParentForm.Text); return; }
+
+            Process.Start(App.cfg.ExApps.Audac, p);
         }
 
         private void tsmi_use_praat_Click(object sender, EventArgs e)
