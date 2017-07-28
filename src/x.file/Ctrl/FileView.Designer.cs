@@ -58,8 +58,6 @@
             this.tsmi_cut = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmi_del = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmi_rename = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsp_p2 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsmi_reload = new System.Windows.Forms.ToolStripMenuItem();
             this.tsp_p5 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmi_use_aud = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmi_use_praat = new System.Windows.Forms.ToolStripMenuItem();
@@ -71,6 +69,8 @@
             this.tsp_p3 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmi_open_vod = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmi_open_voc = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsp_p2 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsmi_reload = new System.Windows.Forms.ToolStripMenuItem();
             this.ts_t1 = new System.Windows.Forms.ToolStrip();
             this.tsb_up = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -235,9 +235,20 @@
             this.cms_tree.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmi_play,
             this.tsmi_st_play,
+            this.tsp_p3,
+            this.tsmi_use_excelopen,
+            this.tsmi_use_wordopen,
+            this.tsmi_use_sol,
+            this.tsmi_use_copen,
+            this.tsmi_use_yb,
+            this.tsmi_use_praat,
+            this.tsmi_use_aud,
+            this.tsp_p2,
+            this.tsmi_open_vod,
+            this.tsmi_open_voc,
             this.tsp_p6,
-            this.tsmi_newdir,
             this.tsmi_open_in_exp,
+            this.tsmi_newdir,
             this.tsp_p1,
             this.tsmi_selall,
             this.tsmi_copy,
@@ -246,17 +257,6 @@
             this.tsmi_del,
             this.tsmi_rename,
             this.tsp_p5,
-            this.tsmi_use_aud,
-            this.tsmi_use_praat,
-            this.tsmi_use_yb,
-            this.tsmi_use_copen,
-            this.tsmi_use_sol,
-            this.tsmi_use_excelopen,
-            this.tsmi_use_wordopen,
-            this.tsp_p3,
-            this.tsmi_open_vod,
-            this.tsmi_open_voc,
-            this.tsp_p2,
             this.tsmi_reload});
             this.cms_tree.Name = "cms_tree";
             this.cms_tree.Size = new System.Drawing.Size(233, 496);
@@ -350,19 +350,6 @@
             this.tsmi_rename.Text = "重命名(&R)";
             this.tsmi_rename.Click += new System.EventHandler(this.tsmi_rename_Click);
             // 
-            // tsp_p2
-            // 
-            this.tsp_p2.Name = "tsp_p2";
-            this.tsp_p2.Size = new System.Drawing.Size(229, 6);
-            // 
-            // tsmi_reload
-            // 
-            this.tsmi_reload.Name = "tsmi_reload";
-            this.tsmi_reload.ShortcutKeys = System.Windows.Forms.Keys.F5;
-            this.tsmi_reload.Size = new System.Drawing.Size(232, 22);
-            this.tsmi_reload.Text = "重新加载(&R)";
-            this.tsmi_reload.Click += new System.EventHandler(this.tsmi_reload_Click);
-            // 
             // tsp_p5
             // 
             this.tsp_p5.Name = "tsp_p5";
@@ -436,6 +423,19 @@
             this.tsmi_open_voc.Size = new System.Drawing.Size(232, 22);
             this.tsmi_open_voc.Text = "打开录音文件夹";
             this.tsmi_open_voc.Click += new System.EventHandler(this.tsmi_open_voc_Click);
+            // 
+            // tsp_p2
+            // 
+            this.tsp_p2.Name = "tsp_p2";
+            this.tsp_p2.Size = new System.Drawing.Size(229, 6);
+            // 
+            // tsmi_reload
+            // 
+            this.tsmi_reload.Name = "tsmi_reload";
+            this.tsmi_reload.ShortcutKeys = System.Windows.Forms.Keys.F5;
+            this.tsmi_reload.Size = new System.Drawing.Size(232, 22);
+            this.tsmi_reload.Text = "重新加载(&R)";
+            this.tsmi_reload.Click += new System.EventHandler(this.tsmi_reload_Click);
             // 
             // ts_t1
             // 

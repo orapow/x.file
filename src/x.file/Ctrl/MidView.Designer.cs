@@ -178,7 +178,7 @@
             this.tsb_play.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsb_play.Name = "tsb_play";
             this.tsb_play.Size = new System.Drawing.Size(23, 22);
-            this.tsb_play.Text = "toolStripButton6";
+            this.tsb_play.Text = "点击播放";
             this.tsb_play.Click += new System.EventHandler(this.tsb_play_Click);
             // 
             // tsb_pause
@@ -188,7 +188,7 @@
             this.tsb_pause.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsb_pause.Name = "tsb_pause";
             this.tsb_pause.Size = new System.Drawing.Size(23, 22);
-            this.tsb_pause.Text = "toolStripButton1";
+            this.tsb_pause.Text = "点击暂停";
             this.tsb_pause.ToolTipText = "暂停";
             this.tsb_pause.Visible = false;
             this.tsb_pause.Click += new System.EventHandler(this.tsb_pause_Click);
@@ -200,7 +200,7 @@
             this.tsb_stop.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsb_stop.Name = "tsb_stop";
             this.tsb_stop.Size = new System.Drawing.Size(23, 22);
-            this.tsb_stop.Text = "toolStripButton2";
+            this.tsb_stop.Text = "点击停止";
             this.tsb_stop.ToolTipText = "停止";
             this.tsb_stop.Click += new System.EventHandler(this.tsb_stop_Click);
             // 

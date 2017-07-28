@@ -140,7 +140,7 @@
             this.groupBox1.Size = new System.Drawing.Size(196, 53);
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "采集点";
+            this.groupBox1.Text = "采录点";
             // 
             // cb_places
             // 
@@ -166,6 +166,7 @@
             this.bt_pl_new.Name = "bt_pl_new";
             this.bt_pl_new.Size = new System.Drawing.Size(26, 26);
             this.bt_pl_new.TabIndex = 7;
+            this.toolTip1.SetToolTip(this.bt_pl_new, "新增采录点");
             this.bt_pl_new.UseVisualStyleBackColor = true;
             this.bt_pl_new.Click += new System.EventHandler(this.bt_pl_new_Click);
             // 

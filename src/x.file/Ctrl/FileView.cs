@@ -647,7 +647,7 @@ namespace X.File.Ctrl
 
             if (!System.IO.File.Exists(p)) { MessageBox.Show("文件不存在", this.ParentForm.Text); return; }
 
-            Process.Start(App.cfg.ExApps.YuBao, "inplace_open=" + p);
+            Process.Start(App.cfg.ExApps.YuBao, "inplace_open=\"" + p + "\"");
         }
 
         private void tsmi_use_sol_Click(object sender, EventArgs e)
@@ -679,7 +679,7 @@ namespace X.File.Ctrl
 
             LoadFile(new DirectoryInfo(dir));
 
-            Process.Start(App.cfg.ExApps.YuBao, "inplace_open=" + dir + p.Replace(dir, ""));
+            Process.Start(App.cfg.ExApps.YuBao, "inplace_open=\"" + dir + p.Replace(dir, "") + "\"");
         }
     }
 

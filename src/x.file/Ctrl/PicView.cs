@@ -30,11 +30,9 @@ namespace X.File.Ctrl
         {
             if (idx < 0 || idx > files.Length - 1) return;
             if (pb_show.Image != null) { pb_show.Image.Dispose(); pb_show.Image = null; System.GC.Collect(); }
-            //var img = Image.FromFile(files[idx]);
             tsl_file.Text = files[idx].ToLower().Replace(App.cfg.Cp.Work.ToLower(), "");
             pb_show.Tag = files[idx];
-            pb_show.Image = Image.FromFile(files[idx]); //img; //img.Clone() as Image;
-            //img.Dispose();
+            pb_show.Image = Image.FromFile(files[idx]); //img; //img.Clone() as Image
             tsl_ct.Text = (idx + 1) + "/" + files.Length;
         }
 

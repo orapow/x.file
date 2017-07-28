@@ -42,9 +42,9 @@
             this.label1.Font = new System.Drawing.Font("微软雅黑", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label1.Location = new System.Drawing.Point(73, 12);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(183, 25);
+            this.label1.Size = new System.Drawing.Size(126, 25);
             this.label1.TabIndex = 0;
-            this.label1.Text = "语保文件快捷管理器";
+            this.label1.Text = "语保文件管家";
             // 
             // pb_icon
             // 
@@ -61,10 +61,10 @@
             this.lk_link.AutoSize = true;
             this.lk_link.Location = new System.Drawing.Point(240, 55);
             this.lk_link.Name = "lk_link";
-            this.lk_link.Size = new System.Drawing.Size(53, 12);
+            this.lk_link.Size = new System.Drawing.Size(41, 12);
             this.lk_link.TabIndex = 2;
             this.lk_link.TabStop = true;
-            this.lk_link.Text = "语保工程";
+            this.lk_link.Text = "语保网";
             this.lk_link.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lk_link_LinkClicked);
             // 
             // label2
@@ -87,7 +87,7 @@
             this.Controls.Add(this.lk_link);
             this.Controls.Add(this.pb_icon);
             this.Controls.Add(this.label1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.MaximizeBox = false;
             this.Name = "About";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

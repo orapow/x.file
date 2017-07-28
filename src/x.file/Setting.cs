@@ -40,7 +40,7 @@ namespace X.File
 
         private void bt_ok_Click(object sender, EventArgs e)
         {
-            if (lb_places.Items.Count == 0) { MessageBox.Show("请至少添加一个采集点", Text); return; }
+            if (lb_places.Items.Count == 0) { MessageBox.Show("请至少添加一个采录点", Text); return; }
 
             DialogResult = DialogResult.OK;
 
