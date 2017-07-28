@@ -11,6 +11,12 @@ namespace X.File.Ctrl
         public delegate void CloseHandler();
         public event CloseHandler Close;
 
+        public delegate void NextHandler();
+        public event NextHandler Next;
+
+        public delegate void PrevHandler();
+        public event PrevHandler Prev;
+
         string[] files = null;
         int idx = 0;
 
@@ -49,16 +55,24 @@ namespace X.File.Ctrl
 
         private void tsb_prev_Click(object sender, EventArgs e)
         {
-            idx--;
-            if (idx < 0) idx = 0;
-            showImage();
+            if (files.Length > 1)
+            {
+                idx--;
+                if (idx < 0) idx = 0;
+                showImage();
+            }
+            else Prev?.Invoke();
         }
 
         private void tsb_next_Click(object sender, EventArgs e)
         {
-            idx++;
-            if (idx > files.Length - 1) idx = files.Length - 1;
-            showImage();
+            if (files.Length > 1)
+            {
+                idx++;
+                if (idx > files.Length - 1) idx = files.Length - 1;
+                showImage();
+            }
+            else Next?.Invoke();
         }
 
         private void PicView_KeyUp(object sender, KeyEventArgs e)

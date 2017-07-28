@@ -24,7 +24,8 @@ namespace X.File
             base.OnLoad(e);
             if (!string.IsNullOrEmpty(PName)) tb_name.Text = PName;
             if (!string.IsNullOrEmpty(PDir)) tb_dir.Text = PDir;
-            tb_name.Text = (App.cfg.Places.Count() + 1).ToString("000");
+            if (string.IsNullOrEmpty(PName)) tb_name.Text = (App.cfg.Places.Count() + 1).ToString("000");
+            else tb_name.Text = PName;
         }
 
         private void bt_ok_Click(object sender, EventArgs e)

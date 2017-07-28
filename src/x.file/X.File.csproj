@@ -56,9 +56,7 @@
     <StartupObject>
     </StartupObject>
   </PropertyGroup>
-  <PropertyGroup>
-    <ApplicationManifest>app.manifest</ApplicationManifest>
-  </PropertyGroup>
+  <PropertyGroup />
   <ItemGroup>
     <Reference Include="NPOI">
       <HintPath>..\..\lib\NPOI.dll</HintPath>

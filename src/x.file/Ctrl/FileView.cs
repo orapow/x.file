@@ -90,6 +90,18 @@ namespace X.File.Ctrl
             this.DoubleBuffered = true;
         }
 
+        public void MoveItem(int p)
+        {
+            var i = 0;
+            if (lv_files.SelectedItems.Count > 0) i = lv_files.SelectedItems[0].Index;
+            lv_files.Items[i].Selected = false;
+            i += p;
+            if (i <= 1) i = 1;
+            if (i >= lv_files.Items.Count) i = lv_files.Items.Count - 1;
+            lv_files.Items[i].Selected = true;
+            PlayFiles?.Invoke(new string[] { lv_files.Items[i].Tag.ToString() });
+        }
+
         public void SelectFile(string file)
         {
             var items = lv_files.Items.Find(file.Substring(file.LastIndexOf("\\") + 1), false);
@@ -313,8 +325,9 @@ namespace X.File.Ctrl
             tsmi_use_praat.Visible = false;
             tsmi_use_sol.Visible = false;
             tsmi_use_yb.Visible = false;
+            tsp_p1.Visible = false;
+            tsp_p2.Visible = false;
             tsp_p3.Visible = false;
-            tsp_p5.Visible = false;
             #endregion
 
             var items = lv_files.SelectedItems;
@@ -349,7 +362,6 @@ namespace X.File.Ctrl
                         {
                             tsmi_use_yb.Visible = true;
                             tsmi_use_copen.Visible = true;
-                            tsp_p5.Visible = true;
                             tsmi_use_sol.Visible = true;
                             tsmi_use_aud.Visible = true;
                         }
@@ -358,15 +370,18 @@ namespace X.File.Ctrl
                     {
                         tsmi_use_excelopen.Visible = true;
                         tsmi_open_voc.Visible = tsmi_open_vod.Visible = true;
+                        tsp_p2.Visible = true;
                         tsp_p3.Visible = true;
-                        tsp_p5.Visible = true;
+                        tsp_p4.Visible = true;
                     }
                     else if (v == "文档")
                     {
                         tsmi_use_wordopen.Visible = true;
+                        //tsp_p2.Visible = true;
                         tsp_p3.Visible = true;
-                        tsp_p5.Visible = true;
+                        tsp_p4.Visible = true;
                     }
+                    tsp_p1.Visible = true;
                 }
             }
             else
@@ -611,11 +626,6 @@ namespace X.File.Ctrl
             if (string.IsNullOrEmpty(App.cfg.ExApps.Audac)) { MessageBox.Show("Audacity软件未配置。", this.ParentForm.Text); return; }
             if (!System.IO.File.Exists(App.cfg.ExApps.Audac)) { MessageBox.Show("Audacity软件配置错误。", this.ParentForm.Text); return; }
 
-            //if (lv_files.SelectedItems.Count == 0) return;
-            //var files = "";
-            //foreach (ListViewItem li in lv_files.SelectedItems)
-            //    files += li.Tag.ToString() + ",";
-
             if (lv_files.SelectedItems.Count == 0) return;
             var p = lv_files.SelectedItems[0].Tag.ToString();
 
@@ -679,7 +689,7 @@ namespace X.File.Ctrl
 
             LoadFile(new DirectoryInfo(dir));
 
-            Process.Start(App.cfg.ExApps.YuBao, "inplace_open=\"" + dir + p.Replace(dir, "") + "\"");
+            Process.Start(App.cfg.ExApps.YuBao, "inplace_open=\"" + dir + p.Substring(p.LastIndexOf('\\')) + "\"");
         }
     }
 

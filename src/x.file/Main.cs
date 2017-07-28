@@ -6,6 +6,7 @@ using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 using System.Linq;
+using System.Runtime.InteropServices;
 
 namespace X.File
 {
@@ -14,7 +15,6 @@ namespace X.File
         public Main()
         {
             InitializeComponent();
-            DoubleBuffered = true;
         }
 
         private void Main_Load(object sender, EventArgs e)
@@ -402,6 +402,26 @@ namespace X.File
             e.DrawFocusRectangle();
             if (e.Index < 0) return;
             e.Graphics.DrawString(lb.Items[e.Index].ToString(), e.Font, new SolidBrush(e.ForeColor), e.Bounds.Left + 5, e.Bounds.Top + 5);
+        }
+
+        private void pic_View_Next()
+        {
+            fv_left.MoveItem(1);
+        }
+
+        private void pic_View_Prev()
+        {
+            fv_left.MoveItem(-1);
+        }
+
+        private void Main_DragDrop(object sender, DragEventArgs e)
+        {
+
+        }
+
+        private void Main_DragEnter(object sender, DragEventArgs e)
+        {
+
         }
     }
 }

@@ -54,9 +54,9 @@
             this.rb_voc = new System.Windows.Forms.RadioButton();
             this.sp_pan2 = new System.Windows.Forms.SplitContainer();
             this.fv_left = new X.File.Ctrl.FileView();
+            this.pic_View = new X.File.Ctrl.PicView();
             this.mda_View = new X.File.Ctrl.MidView();
             this.xls_View = new X.File.Ctrl.XlsView();
-            this.pic_View = new X.File.Ctrl.PicView();
             this.ss_status = new System.Windows.Forms.StatusStrip();
             this.lb_tip = new System.Windows.Forms.ToolStripStatusLabel();
             this.tssl_pname = new System.Windows.Forms.ToolStripStatusLabel();
@@ -345,9 +345,9 @@
             // sp_pan2.Panel2
             // 
             this.sp_pan2.Panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.sp_pan2.Panel2.Controls.Add(this.pic_View);
             this.sp_pan2.Panel2.Controls.Add(this.mda_View);
             this.sp_pan2.Panel2.Controls.Add(this.xls_View);
-            this.sp_pan2.Panel2.Controls.Add(this.pic_View);
             this.sp_pan2.Panel2.Padding = new System.Windows.Forms.Padding(1);
             this.sp_pan2.Panel2.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.sp_pan2.Panel2Collapsed = true;
@@ -365,6 +365,18 @@
             this.fv_left.Size = new System.Drawing.Size(1059, 551);
             this.fv_left.TabIndex = 0;
             this.fv_left.PlayFiles += new X.File.Ctrl.FileView.PlayFilesHandler(this.fv_left_PlayFiles);
+            // 
+            // pic_View
+            // 
+            this.pic_View.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pic_View.Location = new System.Drawing.Point(1, 1);
+            this.pic_View.Name = "pic_View";
+            this.pic_View.Size = new System.Drawing.Size(94, 98);
+            this.pic_View.TabIndex = 1;
+            this.pic_View.Visible = false;
+            this.pic_View.Close += new X.File.Ctrl.PicView.CloseHandler(this.pic_View_Close);
+            this.pic_View.Next += new X.File.Ctrl.PicView.NextHandler(this.pic_View_Next);
+            this.pic_View.Prev += new X.File.Ctrl.PicView.PrevHandler(this.pic_View_Prev);
             // 
             // mda_View
             // 
@@ -386,16 +398,6 @@
             this.xls_View.TabIndex = 2;
             this.xls_View.Visible = false;
             this.xls_View.Close += new X.File.Ctrl.XlsView.CloseHandler(this.xls_View_Close);
-            // 
-            // pic_View
-            // 
-            this.pic_View.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pic_View.Location = new System.Drawing.Point(1, 1);
-            this.pic_View.Name = "pic_View";
-            this.pic_View.Size = new System.Drawing.Size(94, 98);
-            this.pic_View.TabIndex = 1;
-            this.pic_View.Visible = false;
-            this.pic_View.Close += new X.File.Ctrl.PicView.CloseHandler(this.pic_View_Close);
             // 
             // ss_status
             // 
@@ -431,6 +433,7 @@
             // 
             // ms_main
             // 
+            this.ms_main.AllowDrop = true;
             this.ms_main.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmi_setting,
             this.tsmi_about,
@@ -507,6 +510,7 @@
             this.Controls.Add(this.ss_status);
             this.Controls.Add(this.sp_pan1);
             this.Controls.Add(this.ms_main);
+            this.DoubleBuffered = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.ms_main;
             this.MinimumSize = new System.Drawing.Size(800, 462);
@@ -516,6 +520,8 @@
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Main_FormClosing);
             this.Load += new System.EventHandler(this.Main_Load);
+            this.DragDrop += new System.Windows.Forms.DragEventHandler(this.Main_DragDrop);
+            this.DragEnter += new System.Windows.Forms.DragEventHandler(this.Main_DragEnter);
             this.sp_pan1.Panel1.ResumeLayout(false);
             this.sp_pan1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.sp_pan1)).EndInit();

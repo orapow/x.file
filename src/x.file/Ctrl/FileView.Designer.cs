@@ -48,9 +48,20 @@
             this.cms_tree = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmi_play = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmi_st_play = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsp_p6 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsmi_newdir = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsp_p3 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsmi_use_excelopen = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmi_use_wordopen = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmi_use_sol = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmi_use_copen = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmi_use_yb = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmi_use_praat = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmi_use_aud = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsp_p2 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsmi_open_vod = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmi_open_voc = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsp_p5 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmi_open_in_exp = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmi_newdir = new System.Windows.Forms.ToolStripMenuItem();
             this.tsp_p1 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmi_selall = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmi_copy = new System.Windows.Forms.ToolStripMenuItem();
@@ -58,18 +69,7 @@
             this.tsmi_cut = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmi_del = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmi_rename = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsp_p5 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsmi_use_aud = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmi_use_praat = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmi_use_yb = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmi_use_copen = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmi_use_sol = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmi_use_excelopen = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmi_use_wordopen = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsp_p3 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsmi_open_vod = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmi_open_voc = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsp_p2 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsp_p4 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmi_reload = new System.Windows.Forms.ToolStripMenuItem();
             this.ts_t1 = new System.Windows.Forms.ToolStrip();
             this.tsb_up = new System.Windows.Forms.ToolStripButton();
@@ -235,7 +235,7 @@
             this.cms_tree.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmi_play,
             this.tsmi_st_play,
-            this.tsp_p3,
+            this.tsp_p1,
             this.tsmi_use_excelopen,
             this.tsmi_use_wordopen,
             this.tsmi_use_sol,
@@ -246,10 +246,10 @@
             this.tsp_p2,
             this.tsmi_open_vod,
             this.tsmi_open_voc,
-            this.tsp_p6,
+            this.tsp_p3,
             this.tsmi_open_in_exp,
             this.tsmi_newdir,
-            this.tsp_p1,
+            this.tsp_p4,
             this.tsmi_selall,
             this.tsmi_copy,
             this.tsmi_parse,
@@ -277,17 +277,84 @@
             this.tsmi_st_play.Text = "顺序播放(&S)";
             this.tsmi_st_play.Click += new System.EventHandler(this.tsmi_st_play_Click);
             // 
-            // tsp_p6
+            // tsp_p3
             // 
-            this.tsp_p6.Name = "tsp_p6";
-            this.tsp_p6.Size = new System.Drawing.Size(229, 6);
+            this.tsp_p3.Name = "tsp_p3";
+            this.tsp_p3.Size = new System.Drawing.Size(229, 6);
+            this.tsp_p3.Visible = false;
             // 
-            // tsmi_newdir
+            // tsmi_use_excelopen
             // 
-            this.tsmi_newdir.Name = "tsmi_newdir";
-            this.tsmi_newdir.Size = new System.Drawing.Size(232, 22);
-            this.tsmi_newdir.Text = "新建文件夹(&N)";
-            this.tsmi_newdir.Click += new System.EventHandler(this.tsb_new_Click);
+            this.tsmi_use_excelopen.Name = "tsmi_use_excelopen";
+            this.tsmi_use_excelopen.Size = new System.Drawing.Size(232, 22);
+            this.tsmi_use_excelopen.Text = "用Excel打开";
+            this.tsmi_use_excelopen.Click += new System.EventHandler(this.tsmi_use_excelopen_Click);
+            // 
+            // tsmi_use_wordopen
+            // 
+            this.tsmi_use_wordopen.Name = "tsmi_use_wordopen";
+            this.tsmi_use_wordopen.Size = new System.Drawing.Size(232, 22);
+            this.tsmi_use_wordopen.Text = "用Word打开";
+            this.tsmi_use_wordopen.Click += new System.EventHandler(this.tsmi_use_wordopen_Click);
+            // 
+            // tsmi_use_sol
+            // 
+            this.tsmi_use_sol.Name = "tsmi_use_sol";
+            this.tsmi_use_sol.Size = new System.Drawing.Size(232, 22);
+            this.tsmi_use_sol.Text = "用SolveigMM打开";
+            this.tsmi_use_sol.Click += new System.EventHandler(this.tsmi_use_sol_Click);
+            // 
+            // tsmi_use_copen
+            // 
+            this.tsmi_use_copen.Name = "tsmi_use_copen";
+            this.tsmi_use_copen.Size = new System.Drawing.Size(232, 22);
+            this.tsmi_use_copen.Text = "用语宝标注创建文件夹并打开";
+            this.tsmi_use_copen.Click += new System.EventHandler(this.tsmi_use_copen_Click);
+            // 
+            // tsmi_use_yb
+            // 
+            this.tsmi_use_yb.Name = "tsmi_use_yb";
+            this.tsmi_use_yb.Size = new System.Drawing.Size(232, 22);
+            this.tsmi_use_yb.Text = "用语宝标注打开";
+            this.tsmi_use_yb.Click += new System.EventHandler(this.tsmi_use_yb_Click);
+            // 
+            // tsmi_use_praat
+            // 
+            this.tsmi_use_praat.Name = "tsmi_use_praat";
+            this.tsmi_use_praat.Size = new System.Drawing.Size(232, 22);
+            this.tsmi_use_praat.Text = "用Praat打开";
+            this.tsmi_use_praat.Click += new System.EventHandler(this.tsmi_use_praat_Click);
+            // 
+            // tsmi_use_aud
+            // 
+            this.tsmi_use_aud.Name = "tsmi_use_aud";
+            this.tsmi_use_aud.Size = new System.Drawing.Size(232, 22);
+            this.tsmi_use_aud.Text = "用Audacity导入音频";
+            this.tsmi_use_aud.Click += new System.EventHandler(this.tsmi_use_aud_Click);
+            // 
+            // tsp_p2
+            // 
+            this.tsp_p2.Name = "tsp_p2";
+            this.tsp_p2.Size = new System.Drawing.Size(229, 6);
+            // 
+            // tsmi_open_vod
+            // 
+            this.tsmi_open_vod.Name = "tsmi_open_vod";
+            this.tsmi_open_vod.Size = new System.Drawing.Size(232, 22);
+            this.tsmi_open_vod.Text = "打开视频文件夹";
+            this.tsmi_open_vod.Click += new System.EventHandler(this.tsmi_open_vod_Click);
+            // 
+            // tsmi_open_voc
+            // 
+            this.tsmi_open_voc.Name = "tsmi_open_voc";
+            this.tsmi_open_voc.Size = new System.Drawing.Size(232, 22);
+            this.tsmi_open_voc.Text = "打开录音文件夹";
+            this.tsmi_open_voc.Click += new System.EventHandler(this.tsmi_open_voc_Click);
+            // 
+            // tsp_p5
+            // 
+            this.tsp_p5.Name = "tsp_p5";
+            this.tsp_p5.Size = new System.Drawing.Size(229, 6);
             // 
             // tsmi_open_in_exp
             // 
@@ -295,6 +362,13 @@
             this.tsmi_open_in_exp.Size = new System.Drawing.Size(232, 22);
             this.tsmi_open_in_exp.Text = "打开所在文件夹(&D)";
             this.tsmi_open_in_exp.Click += new System.EventHandler(this.tsmi_open_in_exp_Click);
+            // 
+            // tsmi_newdir
+            // 
+            this.tsmi_newdir.Name = "tsmi_newdir";
+            this.tsmi_newdir.Size = new System.Drawing.Size(232, 22);
+            this.tsmi_newdir.Text = "新建文件夹(&N)";
+            this.tsmi_newdir.Click += new System.EventHandler(this.tsb_new_Click);
             // 
             // tsp_p1
             // 
@@ -350,84 +424,10 @@
             this.tsmi_rename.Text = "重命名(&R)";
             this.tsmi_rename.Click += new System.EventHandler(this.tsmi_rename_Click);
             // 
-            // tsp_p5
+            // tsp_p4
             // 
-            this.tsp_p5.Name = "tsp_p5";
-            this.tsp_p5.Size = new System.Drawing.Size(229, 6);
-            // 
-            // tsmi_use_aud
-            // 
-            this.tsmi_use_aud.Name = "tsmi_use_aud";
-            this.tsmi_use_aud.Size = new System.Drawing.Size(232, 22);
-            this.tsmi_use_aud.Text = "用Audacity导入音频";
-            this.tsmi_use_aud.Click += new System.EventHandler(this.tsmi_use_aud_Click);
-            // 
-            // tsmi_use_praat
-            // 
-            this.tsmi_use_praat.Name = "tsmi_use_praat";
-            this.tsmi_use_praat.Size = new System.Drawing.Size(232, 22);
-            this.tsmi_use_praat.Text = "用Praat打开";
-            this.tsmi_use_praat.Click += new System.EventHandler(this.tsmi_use_praat_Click);
-            // 
-            // tsmi_use_yb
-            // 
-            this.tsmi_use_yb.Name = "tsmi_use_yb";
-            this.tsmi_use_yb.Size = new System.Drawing.Size(232, 22);
-            this.tsmi_use_yb.Text = "用语宝标注打开";
-            this.tsmi_use_yb.Click += new System.EventHandler(this.tsmi_use_yb_Click);
-            // 
-            // tsmi_use_copen
-            // 
-            this.tsmi_use_copen.Name = "tsmi_use_copen";
-            this.tsmi_use_copen.Size = new System.Drawing.Size(232, 22);
-            this.tsmi_use_copen.Text = "用语宝标注创建文件夹并打开";
-            this.tsmi_use_copen.Click += new System.EventHandler(this.tsmi_use_copen_Click);
-            // 
-            // tsmi_use_sol
-            // 
-            this.tsmi_use_sol.Name = "tsmi_use_sol";
-            this.tsmi_use_sol.Size = new System.Drawing.Size(232, 22);
-            this.tsmi_use_sol.Text = "用SolveigMM打开";
-            this.tsmi_use_sol.Click += new System.EventHandler(this.tsmi_use_sol_Click);
-            // 
-            // tsmi_use_excelopen
-            // 
-            this.tsmi_use_excelopen.Name = "tsmi_use_excelopen";
-            this.tsmi_use_excelopen.Size = new System.Drawing.Size(232, 22);
-            this.tsmi_use_excelopen.Text = "用Excel打开";
-            this.tsmi_use_excelopen.Click += new System.EventHandler(this.tsmi_use_excelopen_Click);
-            // 
-            // tsmi_use_wordopen
-            // 
-            this.tsmi_use_wordopen.Name = "tsmi_use_wordopen";
-            this.tsmi_use_wordopen.Size = new System.Drawing.Size(232, 22);
-            this.tsmi_use_wordopen.Text = "用Word打开";
-            this.tsmi_use_wordopen.Click += new System.EventHandler(this.tsmi_use_wordopen_Click);
-            // 
-            // tsp_p3
-            // 
-            this.tsp_p3.Name = "tsp_p3";
-            this.tsp_p3.Size = new System.Drawing.Size(229, 6);
-            this.tsp_p3.Visible = false;
-            // 
-            // tsmi_open_vod
-            // 
-            this.tsmi_open_vod.Name = "tsmi_open_vod";
-            this.tsmi_open_vod.Size = new System.Drawing.Size(232, 22);
-            this.tsmi_open_vod.Text = "打开视频文件夹";
-            this.tsmi_open_vod.Click += new System.EventHandler(this.tsmi_open_vod_Click);
-            // 
-            // tsmi_open_voc
-            // 
-            this.tsmi_open_voc.Name = "tsmi_open_voc";
-            this.tsmi_open_voc.Size = new System.Drawing.Size(232, 22);
-            this.tsmi_open_voc.Text = "打开录音文件夹";
-            this.tsmi_open_voc.Click += new System.EventHandler(this.tsmi_open_voc_Click);
-            // 
-            // tsp_p2
-            // 
-            this.tsp_p2.Name = "tsp_p2";
-            this.tsp_p2.Size = new System.Drawing.Size(229, 6);
+            this.tsp_p4.Name = "tsp_p4";
+            this.tsp_p4.Size = new System.Drawing.Size(229, 6);
             // 
             // tsmi_reload
             // 
@@ -655,7 +655,7 @@
         private System.Windows.Forms.ToolStripMenuItem tsmi_reload;
         private System.Windows.Forms.ToolStripMenuItem tsmi_del;
         private System.Windows.Forms.ToolStripMenuItem tsmi_play;
-        private System.Windows.Forms.ToolStripSeparator tsp_p5;
+        private System.Windows.Forms.ToolStripSeparator tsp_p4;
         private System.Windows.Forms.ToolStripMenuItem tsmi_copy;
         private System.Windows.Forms.ToolStripMenuItem tsmi_parse;
         private System.Windows.Forms.ToolStripMenuItem tsmi_cut;
@@ -667,7 +667,7 @@
         private System.Windows.Forms.ToolStripMenuItem tsmi_newdir;
         private System.Windows.Forms.ToolStripMenuItem tsmi_selall;
         private System.Windows.Forms.ToolStripMenuItem tsmi_st_play;
-        private System.Windows.Forms.ToolStripSeparator tsp_p6;
+        private System.Windows.Forms.ToolStripSeparator tsp_p5;
         private System.Windows.Forms.ToolStripMenuItem tsmi_use_aud;
         private System.Windows.Forms.ToolStripMenuItem tsmi_use_praat;
         private System.Windows.Forms.ToolStripMenuItem tsmi_use_yb;
