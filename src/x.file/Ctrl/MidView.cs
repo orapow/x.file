@@ -33,32 +33,50 @@ namespace X.File.Ctrl
                 vlc_player_ = new VlcPlayer(pluginPath);
                 vlc_player_.SetRenderWindow((int)panel1.Handle);
             }
-            else vlc_player_.Stop();
-            files = fs;
-            idx = 0;
-            play();
+            var p = true;
+            if (fs.Length == 1)
+            {
+                if (fs[0].ToLower() == tsl_file.Tag + "")
+                {
+                    p = false;
+                    if (!tm_play.Enabled)
+                        tsb_play_Click(null, null);
+                    else
+                        tsb_pause_Click(null, null);
+                }
+            }
+            if (p)
+            {
+                vlc_player_.Stop();
+                files = fs;
+                idx = 0;
+                play();
+            }
         }
 
         void play()
         {
+            var file = files[idx];
             cp = 0;
             cpct = 0;
-            var file = files[idx];
             vlc_player_.LoadFile(file);
             vlc_player_.Play();
             totaltime = getTime(vlc_player_.Duration * 1000);
             tb_proc.SetRange(0, (int)(vlc_player_.Duration * 1000));
             tsl_file.Text = "文件：" + file.ToLower().Replace(App.cfg.Cp.Work.ToLower(), "");
+            tsl_file.Tag = file.ToLower();
             lb_filename.Text = file.Substring(file.LastIndexOf('\\') + 1);
-            tsb_play.Visible = false;
+            tsp_name.Text = lb_filename.Text;
+            pb_play.Visible = false;
             tsl_ct.Text = (idx + 1) + "/" + files.Length;
             Thread.Sleep(50);
-            tm_play.Enabled = tsb_stop.Enabled = tsb_pause.Visible = true;
+            tm_play.Enabled = pb_stop.Enabled = pb_pause.Visible = true;
             Playing?.Invoke(file);
         }
 
         public void Stop()
         {
+            tsl_file.Tag = "";
             idx = 0;
             if (vlc_player_ == null) return;
             vlc_player_.Stop();
@@ -74,13 +92,6 @@ namespace X.File.Ctrl
             t = ((int)sec % 60).ToString("00") + ":" + mt; sec /= 60;
             t = ((int)sec % 60).ToString("00") + ":" + t; sec /= 60;
             t = ((int)sec % 60).ToString("00") + ":" + t; sec /= 60;
-
-            //if (sec >= 60) { t = (sec % 60).ToString("00") + "." + mt; sec /= 60; }
-            //else t = "00" + t;
-            //if (sec >= 60) { t = (sec % 60).ToString("00") + ":" + t; sec /= 60; }
-            //else t = ((int)sec).ToString("00") + ":" + t;
-            //if (sec >= 60) { t = (sec % 60).ToString("00") + ":" + t; sec /= 60; }
-            //else t = "00:" + (int)sec;
             return t;
         }
 
@@ -108,9 +119,10 @@ namespace X.File.Ctrl
 
         private void tsb_stop_Click(object sender, EventArgs e)
         {
-            tm_play.Enabled = tsb_pause.Visible = tsb_stop.Enabled = false;
+            tsl_file.Tag = "";
+            tm_play.Enabled = pb_pause.Visible = pb_stop.Enabled = false;
             if (vlc_player_ != null) { vlc_player_.Stop(); vlc_player_ = null; }
-            tsb_play.Visible = true;
+            pb_play.Visible = true;
             tb_proc.Value = tb_proc.Maximum;
             tsl_time.Text = "时间：" + totaltime + "/" + totaltime;
         }
@@ -120,8 +132,8 @@ namespace X.File.Ctrl
             if (vlc_player_ == null) return;
             tm_play.Enabled = false;
             vlc_player_.Pause();
-            tsb_pause.Visible = false;
-            tsb_play.Visible = tsb_stop.Enabled = true;
+            pb_pause.Visible = false;
+            pb_play.Visible = pb_stop.Enabled = true;
         }
 
         private void tsb_play_Click(object sender, EventArgs e)
@@ -129,8 +141,8 @@ namespace X.File.Ctrl
             if (vlc_player_ == null) { idx = -1; PlayFiles(files); return; }
             tm_play.Enabled = true;
             vlc_player_.Pause();
-            tsb_play.Visible = false;
-            tsb_pause.Visible = tsb_stop.Enabled = true;
+            pb_play.Visible = false;
+            pb_pause.Visible = pb_stop.Enabled = true;
         }
 
         private void panel1_DoubleClick(object sender, EventArgs e)
@@ -147,7 +159,8 @@ namespace X.File.Ctrl
 
         private void tb_proc_Scroll(object sender, EventArgs e)
         {
-
+            if (vlc_player_ == null) return;
+            //vlc_player_.SetPlayTime(tb_proc.Value / 1000.0);
         }
 
         private void MidView_VisibleChanged(object sender, EventArgs e)

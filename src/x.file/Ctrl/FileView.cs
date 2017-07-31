@@ -20,6 +20,9 @@ namespace X.File.Ctrl
         public delegate void PlayFilesHandler(string[] file);
         public event PlayFilesHandler PlayFiles;
 
+        public delegate void ShowSettingHandler();
+        public event ShowSettingHandler ShowSetting;
+
         [DllImport("shell32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         private static extern bool SHFileOperation([In, Out]  SHFILEOPSTRUCT str);
         private const int FO_MOVE = 0x1;
@@ -623,8 +626,8 @@ namespace X.File.Ctrl
 
         private void tsmi_use_aud_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(App.cfg.ExApps.Audac)) { MessageBox.Show("Audacity软件未配置。", this.ParentForm.Text); return; }
-            if (!System.IO.File.Exists(App.cfg.ExApps.Audac)) { MessageBox.Show("Audacity软件配置错误。", this.ParentForm.Text); return; }
+            if (string.IsNullOrEmpty(App.cfg.ExApps.Audac)) { if (MessageBox.Show("Audacity软件未配置，是否立即配置？", this.ParentForm.Text, MessageBoxButtons.YesNo) == DialogResult.Yes) ShowSetting?.Invoke(); return; }
+            if (!System.IO.File.Exists(App.cfg.ExApps.Audac)) { if (MessageBox.Show("Audacity软件配置错误，是否立即配置？", this.ParentForm.Text, MessageBoxButtons.YesNo) == DialogResult.Yes) ShowSetting?.Invoke(); return; }
 
             if (lv_files.SelectedItems.Count == 0) return;
             var p = lv_files.SelectedItems[0].Tag.ToString();
@@ -636,8 +639,8 @@ namespace X.File.Ctrl
 
         private void tsmi_use_praat_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(App.cfg.ExApps.Praat)) { MessageBox.Show("Praat软件未配置。", this.ParentForm.Text); return; }
-            if (!System.IO.File.Exists(App.cfg.ExApps.Audac)) { MessageBox.Show("Praat软件配置错误。", this.ParentForm.Text); return; }
+            if (string.IsNullOrEmpty(App.cfg.ExApps.Praat)) { if (MessageBox.Show("Praat软件未配置，是否立即配置？", this.ParentForm.Text, MessageBoxButtons.YesNo) == DialogResult.Yes) ShowSetting?.Invoke(); return; }
+            if (!System.IO.File.Exists(App.cfg.ExApps.Audac)) { if (MessageBox.Show("Praat软件配置错误，是否立即配置？", this.ParentForm.Text, MessageBoxButtons.YesNo) == DialogResult.Yes) ShowSetting?.Invoke(); return; }
 
             if (lv_files.SelectedItems.Count == 0) return;
             var p = lv_files.SelectedItems[0].Tag.ToString();
@@ -649,8 +652,8 @@ namespace X.File.Ctrl
 
         private void tsmi_use_yb_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(App.cfg.ExApps.YuBao)) { MessageBox.Show("语宝标注软件未配置。", this.ParentForm.Text); return; }
-            if (!System.IO.File.Exists(App.cfg.ExApps.Audac)) { MessageBox.Show("语宝标注软件配置错误。", this.ParentForm.Text); return; }
+            if (string.IsNullOrEmpty(App.cfg.ExApps.YuBao)) { if (MessageBox.Show("语宝标注软件未配置，是否立即配置？", this.ParentForm.Text, MessageBoxButtons.YesNo) == DialogResult.Yes) ShowSetting?.Invoke(); return; }
+            if (!System.IO.File.Exists(App.cfg.ExApps.Audac)) { if (MessageBox.Show("语宝标注软件配置错误，是否立即配置？", this.ParentForm.Text, MessageBoxButtons.YesNo) == DialogResult.Yes) ShowSetting?.Invoke(); return; }
 
             if (lv_files.SelectedItems.Count == 0) return;
             var p = lv_files.SelectedItems[0].Tag.ToString();
@@ -662,8 +665,8 @@ namespace X.File.Ctrl
 
         private void tsmi_use_sol_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(App.cfg.ExApps.Solveig)) { MessageBox.Show("SolveigMM软件未配置。", this.ParentForm.Text); return; }
-            if (!System.IO.File.Exists(App.cfg.ExApps.Audac)) { MessageBox.Show("SolveigMM软件配置错误。", this.ParentForm.Text); return; }
+            if (string.IsNullOrEmpty(App.cfg.ExApps.Solveig)) { if (MessageBox.Show("SolveigMM软件未配置，是否立即配置？", this.ParentForm.Text, MessageBoxButtons.YesNo) == DialogResult.Yes) ShowSetting?.Invoke(); return; }
+            if (!System.IO.File.Exists(App.cfg.ExApps.Audac)) { if (MessageBox.Show("SolveigMM软件配置错误，是否立即配置？", this.ParentForm.Text, MessageBoxButtons.YesNo) == DialogResult.Yes) ShowSetting?.Invoke(); return; }
 
             if (lv_files.SelectedItems.Count == 0) return;
             var p = lv_files.SelectedItems[0].Tag.ToString();
@@ -675,8 +678,8 @@ namespace X.File.Ctrl
 
         private void tsmi_use_copen_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(App.cfg.ExApps.YuBao)) { MessageBox.Show("语宝标注软件未配置。", this.ParentForm.Text); return; }
-            if (!System.IO.File.Exists(App.cfg.ExApps.YuBao)) { MessageBox.Show("语宝标注软件配置错误。", this.ParentForm.Text); return; }
+            if (string.IsNullOrEmpty(App.cfg.ExApps.YuBao)) { if (MessageBox.Show("语宝标注软件未配置，是否立即配置？", this.ParentForm.Text, MessageBoxButtons.YesNo) == DialogResult.Yes) ShowSetting?.Invoke(); return; }
+            if (!System.IO.File.Exists(App.cfg.ExApps.YuBao)) { if (MessageBox.Show("语宝标注软件配置错误，是否立即配置？", this.ParentForm.Text, MessageBoxButtons.YesNo) == DialogResult.Yes) ShowSetting?.Invoke(); return; }
 
             if (lv_files.SelectedItems.Count == 0) return;
             var p = lv_files.SelectedItems[0].Tag.ToString();

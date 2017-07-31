@@ -423,5 +423,10 @@ namespace X.File
         {
 
         }
+
+        private void fv_left_ShowSetting()
+        {
+            tsmi_setting_Click(null, null);
+        }
     }
 }

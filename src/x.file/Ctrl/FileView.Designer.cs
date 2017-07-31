@@ -48,7 +48,7 @@
             this.cms_tree = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmi_play = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmi_st_play = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsp_p3 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsp_p1 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmi_use_excelopen = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmi_use_wordopen = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmi_use_sol = new System.Windows.Forms.ToolStripMenuItem();
@@ -59,17 +59,17 @@
             this.tsp_p2 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmi_open_vod = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmi_open_voc = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsp_p5 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsp_p3 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmi_open_in_exp = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmi_newdir = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsp_p1 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsp_p4 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmi_selall = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmi_copy = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmi_parse = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmi_cut = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmi_del = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmi_rename = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsp_p4 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsp_p5 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmi_reload = new System.Windows.Forms.ToolStripMenuItem();
             this.ts_t1 = new System.Windows.Forms.ToolStrip();
             this.tsb_up = new System.Windows.Forms.ToolStripButton();
@@ -259,7 +259,7 @@
             this.tsp_p5,
             this.tsmi_reload});
             this.cms_tree.Name = "cms_tree";
-            this.cms_tree.Size = new System.Drawing.Size(233, 496);
+            this.cms_tree.Size = new System.Drawing.Size(233, 474);
             this.cms_tree.Opening += new System.ComponentModel.CancelEventHandler(this.cms_tree_Opening);
             // 
             // tsmi_play
@@ -277,11 +277,10 @@
             this.tsmi_st_play.Text = "顺序播放(&S)";
             this.tsmi_st_play.Click += new System.EventHandler(this.tsmi_st_play_Click);
             // 
-            // tsp_p3
+            // tsp_p1
             // 
-            this.tsp_p3.Name = "tsp_p3";
-            this.tsp_p3.Size = new System.Drawing.Size(229, 6);
-            this.tsp_p3.Visible = false;
+            this.tsp_p1.Name = "tsp_p1";
+            this.tsp_p1.Size = new System.Drawing.Size(229, 6);
             // 
             // tsmi_use_excelopen
             // 
@@ -351,10 +350,11 @@
             this.tsmi_open_voc.Text = "打开录音文件夹";
             this.tsmi_open_voc.Click += new System.EventHandler(this.tsmi_open_voc_Click);
             // 
-            // tsp_p5
+            // tsp_p3
             // 
-            this.tsp_p5.Name = "tsp_p5";
-            this.tsp_p5.Size = new System.Drawing.Size(229, 6);
+            this.tsp_p3.Name = "tsp_p3";
+            this.tsp_p3.Size = new System.Drawing.Size(229, 6);
+            this.tsp_p3.Visible = false;
             // 
             // tsmi_open_in_exp
             // 
@@ -370,10 +370,10 @@
             this.tsmi_newdir.Text = "新建文件夹(&N)";
             this.tsmi_newdir.Click += new System.EventHandler(this.tsb_new_Click);
             // 
-            // tsp_p1
+            // tsp_p4
             // 
-            this.tsp_p1.Name = "tsp_p1";
-            this.tsp_p1.Size = new System.Drawing.Size(229, 6);
+            this.tsp_p4.Name = "tsp_p4";
+            this.tsp_p4.Size = new System.Drawing.Size(229, 6);
             // 
             // tsmi_selall
             // 
@@ -424,10 +424,10 @@
             this.tsmi_rename.Text = "重命名(&R)";
             this.tsmi_rename.Click += new System.EventHandler(this.tsmi_rename_Click);
             // 
-            // tsp_p4
+            // tsp_p5
             // 
-            this.tsp_p4.Name = "tsp_p4";
-            this.tsp_p4.Size = new System.Drawing.Size(229, 6);
+            this.tsp_p5.Name = "tsp_p5";
+            this.tsp_p5.Size = new System.Drawing.Size(229, 6);
             // 
             // tsmi_reload
             // 
@@ -480,7 +480,7 @@
             // tsb_newdir
             // 
             this.tsb_newdir.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsb_newdir.Image = global::X.File.Properties.Resources.add;
+            this.tsb_newdir.Image = global::X.File.Properties.Resources.dir;
             this.tsb_newdir.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsb_newdir.Name = "tsb_newdir";
             this.tsb_newdir.Size = new System.Drawing.Size(24, 24);
