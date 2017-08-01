@@ -234,11 +234,14 @@ namespace X.File.Ctrl
                     if (e.SubItem.Tag == null)
                     {
                         //for (var i = 0; i < 2560; i++) Console.WriteLine(i + "->" + dir.GetDetailsOf(dir.ParseName(e.Item.Text + e.Item.SubItems[2].Text), i));
-                        var w = dir.GetDetailsOf(dir.ParseName(e.Item.Text + e.Item.SubItems[2].Text), 310).Replace("帧宽度", "");
-                        var h = dir.GetDetailsOf(dir.ParseName(e.Item.Text + e.Item.SubItems[2].Text), 308).Replace("帧高度", "");
                         var rt = "";
-                        if (!string.IsNullOrEmpty(w + h)) rt = w + " x " + h;
-                        else rt = dir.GetDetailsOf(dir.ParseName(e.Item.Text + e.Item.SubItems[2].Text), 31).Replace("分辨率", "");
+                        if (System.IO.File.Exists(e.Item.Tag.ToString()))
+                        {
+                            var w = dir.GetDetailsOf(dir.ParseName(e.Item.Text + e.Item.SubItems[2].Text), 310).Replace("帧宽度", "").Replace("Masters Keywords (debug)", "");
+                            var h = dir.GetDetailsOf(dir.ParseName(e.Item.Text + e.Item.SubItems[2].Text), 308).Replace("帧高度", "").Replace("Masters Keywords (debug)", "");
+                            if (!string.IsNullOrEmpty(w + h)) rt = w + " x " + h;
+                            else rt = dir.GetDetailsOf(dir.ParseName(e.Item.Text + e.Item.SubItems[2].Text), 31).Replace("分辨率", "");
+                        }
                         if (!string.IsNullOrEmpty(rt)) { e.SubItem.Tag = e.SubItem.Text = rt; if (e.Header.Width == 1) e.Header.Width = 80; }
                     }
                 }
