@@ -53,6 +53,10 @@
             this.tsmi_colall = new System.Windows.Forms.ToolStripMenuItem();
             this.rb_voc = new System.Windows.Forms.RadioButton();
             this.sp_pan2 = new System.Windows.Forms.SplitContainer();
+            this.fv_left = new X.File.Ctrl.FileView();
+            this.pic_View = new X.File.Ctrl.PicView();
+            this.mda_View = new X.File.Ctrl.MidView();
+            this.xls_View = new X.File.Ctrl.XlsView();
             this.ss_status = new System.Windows.Forms.StatusStrip();
             this.lb_tip = new System.Windows.Forms.ToolStripStatusLabel();
             this.tssl_pname = new System.Windows.Forms.ToolStripStatusLabel();
@@ -66,10 +70,6 @@
             this.RightToolStripPanel = new System.Windows.Forms.ToolStripPanel();
             this.LeftToolStripPanel = new System.Windows.Forms.ToolStripPanel();
             this.ContentPanel = new System.Windows.Forms.ToolStripContentPanel();
-            this.fv_left = new X.File.Ctrl.FileView();
-            this.pic_View = new X.File.Ctrl.PicView();
-            this.mda_View = new X.File.Ctrl.MidView();
-            this.xls_View = new X.File.Ctrl.XlsView();
             ((System.ComponentModel.ISupportInitialize)(this.sp_pan1)).BeginInit();
             this.sp_pan1.Panel1.SuspendLayout();
             this.sp_pan1.Panel2.SuspendLayout();
@@ -356,6 +356,49 @@
             this.sp_pan2.SplitterWidth = 2;
             this.sp_pan2.TabIndex = 10;
             // 
+            // fv_left
+            // 
+            this.fv_left.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.fv_left.Location = new System.Drawing.Point(1, 1);
+            this.fv_left.Name = "fv_left";
+            this.fv_left.Size = new System.Drawing.Size(1059, 551);
+            this.fv_left.TabIndex = 0;
+            this.fv_left.PlayFiles += new X.File.Ctrl.FileView.PlayFilesHandler(this.fv_left_PlayFiles);
+            this.fv_left.ShowSetting += new X.File.Ctrl.FileView.ShowSettingHandler(this.fv_left_ShowSetting);
+            // 
+            // pic_View
+            // 
+            this.pic_View.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pic_View.Location = new System.Drawing.Point(1, 1);
+            this.pic_View.Name = "pic_View";
+            this.pic_View.Size = new System.Drawing.Size(94, 98);
+            this.pic_View.TabIndex = 1;
+            this.pic_View.Visible = false;
+            this.pic_View.Close += new X.File.Ctrl.PicView.CloseHandler(this.pic_View_Close);
+            this.pic_View.Next += new X.File.Ctrl.PicView.NextHandler(this.pic_View_Next);
+            this.pic_View.Prev += new X.File.Ctrl.PicView.PrevHandler(this.pic_View_Prev);
+            // 
+            // mda_View
+            // 
+            this.mda_View.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mda_View.Location = new System.Drawing.Point(1, 1);
+            this.mda_View.Name = "mda_View";
+            this.mda_View.Size = new System.Drawing.Size(94, 98);
+            this.mda_View.TabIndex = 0;
+            this.mda_View.Visible = false;
+            this.mda_View.Close += new X.File.Ctrl.MidView.CloseHandler(this.mda_View_Close);
+            this.mda_View.Playing += new X.File.Ctrl.MidView.PlayingHandler(this.mda_View_Playing);
+            // 
+            // xls_View
+            // 
+            this.xls_View.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.xls_View.Location = new System.Drawing.Point(1, 1);
+            this.xls_View.Name = "xls_View";
+            this.xls_View.Size = new System.Drawing.Size(94, 98);
+            this.xls_View.TabIndex = 2;
+            this.xls_View.Visible = false;
+            this.xls_View.Close += new X.File.Ctrl.XlsView.CloseHandler(this.xls_View_Close);
+            // 
             // ss_status
             // 
             this.ss_status.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -458,53 +501,8 @@
             this.ContentPanel.Margin = new System.Windows.Forms.Padding(0);
             this.ContentPanel.Size = new System.Drawing.Size(555, 499);
             // 
-            // fv_left
-            // 
-            this.fv_left.AllowDrop = true;
-            this.fv_left.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.fv_left.Location = new System.Drawing.Point(1, 1);
-            this.fv_left.Name = "fv_left";
-            this.fv_left.Size = new System.Drawing.Size(1059, 551);
-            this.fv_left.TabIndex = 0;
-            this.fv_left.PlayFiles += new X.File.Ctrl.FileView.PlayFilesHandler(this.fv_left_PlayFiles);
-            this.fv_left.ShowSetting += new X.File.Ctrl.FileView.ShowSettingHandler(this.fv_left_ShowSetting);
-            // 
-            // pic_View
-            // 
-            this.pic_View.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pic_View.Location = new System.Drawing.Point(1, 1);
-            this.pic_View.Name = "pic_View";
-            this.pic_View.Size = new System.Drawing.Size(94, 98);
-            this.pic_View.TabIndex = 1;
-            this.pic_View.Visible = false;
-            this.pic_View.Close += new X.File.Ctrl.PicView.CloseHandler(this.pic_View_Close);
-            this.pic_View.Next += new X.File.Ctrl.PicView.NextHandler(this.pic_View_Next);
-            this.pic_View.Prev += new X.File.Ctrl.PicView.PrevHandler(this.pic_View_Prev);
-            // 
-            // mda_View
-            // 
-            this.mda_View.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.mda_View.Location = new System.Drawing.Point(1, 1);
-            this.mda_View.Name = "mda_View";
-            this.mda_View.Size = new System.Drawing.Size(94, 98);
-            this.mda_View.TabIndex = 0;
-            this.mda_View.Visible = false;
-            this.mda_View.Close += new X.File.Ctrl.MidView.CloseHandler(this.mda_View_Close);
-            this.mda_View.Playing += new X.File.Ctrl.MidView.PlayingHandler(this.mda_View_Playing);
-            // 
-            // xls_View
-            // 
-            this.xls_View.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.xls_View.Location = new System.Drawing.Point(1, 1);
-            this.xls_View.Name = "xls_View";
-            this.xls_View.Size = new System.Drawing.Size(94, 98);
-            this.xls_View.TabIndex = 2;
-            this.xls_View.Visible = false;
-            this.xls_View.Close += new X.File.Ctrl.XlsView.CloseHandler(this.xls_View_Close);
-            // 
             // Main
             // 
-            this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1266, 606);

@@ -389,7 +389,7 @@ namespace X.File.Ctrl
             }
             else
             {
-                tsmi_del.Visible = tsp_p3.Visible = tsmi_copy.Enabled = tsmi_cut.Enabled = true;
+                tsmi_del.Enabled = tsp_p3.Visible = tsmi_copy.Enabled = tsmi_cut.Enabled = true;
                 tsmi_play.Enabled = true;
                 tsmi_rename.Enabled = false;
                 tsmi_use_excelopen.Visible = false;
@@ -693,6 +693,35 @@ namespace X.File.Ctrl
             LoadFile(new DirectoryInfo(dir));
 
             Process.Start(App.cfg.ExApps.YuBao, "inplace_open=\"" + dir + p.Substring(p.LastIndexOf('\\')) + "\"");
+        }
+
+        private void FileView_DragDrop(object sender, DragEventArgs e)
+        {
+            var fs = e.Data.GetData(DataFormats.FileDrop) as string[];
+            if (fs == null || fs.Length == 0) return;
+            var dr = MessageBox.Show("文件拖放中，共" + fs.Length + "个文件，是否移动？\r\n是：移动文件到当前目录\r\n否：复制文件到当前目录\r\n取消：取消操作", this.ParentForm.Text, MessageBoxButtons.YesNoCancel);
+            if (dr == DialogResult.Cancel) return;
+            var files = "";
+            foreach (var f in fs) files += f + "\0";
+            files += "\0";
+            copyFile(tsl_dir.Tag.ToString(), files, dr == DialogResult.Yes ? 1 : 2);
+            LoadFile(null);
+        }
+
+        private void FileView_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop)) e.Effect = DragDropEffects.Copy | DragDropEffects.Move;
+        }
+
+        private void lv_files_ItemDrag(object sender, ItemDragEventArgs e)
+        {
+            if (e.Button != MouseButtons.Left) return;
+            if (lv_files.SelectedItems.Count == 0) return;
+            var fs = new List<string>();
+            foreach (ListViewItem li in lv_files.SelectedItems) fs.Add(li.Tag.ToString());
+            var data = new DataObject(DataFormats.FileDrop, fs.ToArray());
+            //data.SetData(DataFormats.StringFormat, fs[0]);
+            DoDragDrop(data, DragDropEffects.Copy | DragDropEffects.Move);
         }
     }
 
