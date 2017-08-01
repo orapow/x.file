@@ -35,7 +35,6 @@
             ""}, -1);
             this.tsc_c1 = new System.Windows.Forms.ToolStripContainer();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
-            this.tsl_dir = new System.Windows.Forms.ToolStripLabel();
             this.tsl_dir_tip = new System.Windows.Forms.ToolStripLabel();
             this.cms_tree = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmi_play = new System.Windows.Forms.ToolStripMenuItem();
@@ -64,14 +63,17 @@
             this.tsp_p5 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmi_reload = new System.Windows.Forms.ToolStripMenuItem();
             this.ts_t1 = new System.Windows.Forms.ToolStrip();
-            this.tsb_up = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsl_dir = new System.Windows.Forms.ToolStripLabel();
+            this.tsb_up = new System.Windows.Forms.ToolStripButton();
             this.tsb_newdir = new System.Windows.Forms.ToolStripButton();
             this.tsb_copy = new System.Windows.Forms.ToolStripButton();
             this.tsb_cut = new System.Windows.Forms.ToolStripButton();
             this.tsb_parse = new System.Windows.Forms.ToolStripButton();
             this.tsb_del = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsb_play = new System.Windows.Forms.ToolStripButton();
             this.toolStripSplitButton1 = new System.Windows.Forms.ToolStripSplitButton();
             this.列表ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.图标ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -136,15 +138,6 @@
             this.toolStrip2.Stretch = true;
             this.toolStrip2.TabIndex = 20;
             // 
-            // tsl_dir
-            // 
-            this.tsl_dir.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.tsl_dir.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.tsl_dir.Image = ((System.Drawing.Image)(resources.GetObject("tsl_dir.Image")));
-            this.tsl_dir.Name = "tsl_dir";
-            this.tsl_dir.Size = new System.Drawing.Size(56, 22);
-            this.tsl_dir.Text = "文件夹：";
-            // 
             // tsl_dir_tip
             // 
             this.tsl_dir_tip.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
@@ -159,13 +152,13 @@
             this.tsmi_play,
             this.tsmi_st_play,
             this.tsp_p1,
+            this.tsmi_use_aud,
+            this.tsmi_use_sol,
+            this.tsmi_use_yb,
+            this.tsmi_use_copen,
+            this.tsmi_use_praat,
             this.tsmi_use_excelopen,
             this.tsmi_use_wordopen,
-            this.tsmi_use_sol,
-            this.tsmi_use_copen,
-            this.tsmi_use_yb,
-            this.tsmi_use_praat,
-            this.tsmi_use_aud,
             this.tsp_p2,
             this.tsmi_open_vod,
             this.tsmi_open_voc,
@@ -370,6 +363,8 @@
             this.ts_t1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsb_up,
             this.toolStripSeparator1,
+            this.tsb_play,
+            this.toolStripSeparator3,
             this.tsb_newdir,
             this.tsb_copy,
             this.tsb_cut,
@@ -385,6 +380,30 @@
             this.ts_t1.Stretch = true;
             this.ts_t1.TabIndex = 19;
             // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 27);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 27);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 27);
+            // 
+            // tsl_dir
+            // 
+            this.tsl_dir.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tsl_dir.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.tsl_dir.Image = ((System.Drawing.Image)(resources.GetObject("tsl_dir.Image")));
+            this.tsl_dir.Name = "tsl_dir";
+            this.tsl_dir.Size = new System.Drawing.Size(56, 22);
+            this.tsl_dir.Text = "文件夹：";
+            // 
             // tsb_up
             // 
             this.tsb_up.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -394,11 +413,6 @@
             this.tsb_up.Size = new System.Drawing.Size(24, 24);
             this.tsb_up.Text = "向上";
             this.tsb_up.Click += new System.EventHandler(this.tsb_up_Click);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 27);
             // 
             // tsb_newdir
             // 
@@ -454,10 +468,15 @@
             this.tsb_del.Text = "删除";
             this.tsb_del.Click += new System.EventHandler(this.tsb_del_Click);
             // 
-            // toolStripSeparator2
+            // tsb_play
             // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 27);
+            this.tsb_play.Image = global::X.File.Properties.Resources.play;
+            this.tsb_play.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsb_play.Name = "tsb_play";
+            this.tsb_play.Size = new System.Drawing.Size(80, 24);
+            this.tsb_play.Text = "顺序播放";
+            this.tsb_play.TextDirection = System.Windows.Forms.ToolStripTextDirection.Horizontal;
+            this.tsb_play.Click += new System.EventHandler(this.tsmi_st_play_Click);
             // 
             // toolStripSplitButton1
             // 
@@ -676,5 +695,7 @@
         private System.Windows.Forms.ToolStripMenuItem tsmi_use_yb;
         private System.Windows.Forms.ToolStripMenuItem tsmi_use_sol;
         private System.Windows.Forms.ToolStripMenuItem tsmi_use_copen;
+        private System.Windows.Forms.ToolStripButton tsb_play;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
     }
 }

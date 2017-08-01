@@ -198,6 +198,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ico.ico" />
+    <None Include="Resources\st.png" />
     <None Include="Resources\pa.png" />
     <None Include="Resources\播放.png" />
     <None Include="Resources\dir.png" />

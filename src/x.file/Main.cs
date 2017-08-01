@@ -414,19 +414,14 @@ namespace X.File
             fv_left.MoveItem(-1);
         }
 
-        private void Main_DragDrop(object sender, DragEventArgs e)
-        {
-
-        }
-
-        private void Main_DragEnter(object sender, DragEventArgs e)
-        {
-
-        }
-
         private void fv_left_ShowSetting()
         {
             tsmi_setting_Click(null, null);
+        }
+
+        private void tsmi_help_Click(object sender, EventArgs e)
+        {
+            Process.Start(Application.StartupPath + "\\帮助文档.pdf");
         }
     }
 }

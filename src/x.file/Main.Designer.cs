@@ -31,12 +31,8 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.sp_pan1 = new System.Windows.Forms.SplitContainer();
-            this.rb_tpl = new System.Windows.Forms.RadioButton();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.cb_places = new System.Windows.Forms.ComboBox();
-            this.bt_pl_new = new System.Windows.Forms.Button();
-            this.rb_pic = new System.Windows.Forms.RadioButton();
-            this.rb_vod = new System.Windows.Forms.RadioButton();
             this.tv_dir = new System.Windows.Forms.TreeView();
             this.cms_tree = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmi_open_in_exp = new System.Windows.Forms.ToolStripMenuItem();
@@ -51,7 +47,6 @@
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmi_expall = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmi_colall = new System.Windows.Forms.ToolStripMenuItem();
-            this.rb_voc = new System.Windows.Forms.RadioButton();
             this.sp_pan2 = new System.Windows.Forms.SplitContainer();
             this.fv_left = new X.File.Ctrl.FileView();
             this.pic_View = new X.File.Ctrl.PicView();
@@ -64,12 +59,18 @@
             this.tsmi_about = new System.Windows.Forms.ToolStripMenuItem();
             this.ms_main = new System.Windows.Forms.MenuStrip();
             this.tsmi_setting = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmi_help = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmi_quit = new System.Windows.Forms.ToolStripMenuItem();
             this.BottomToolStripPanel = new System.Windows.Forms.ToolStripPanel();
             this.TopToolStripPanel = new System.Windows.Forms.ToolStripPanel();
             this.RightToolStripPanel = new System.Windows.Forms.ToolStripPanel();
             this.LeftToolStripPanel = new System.Windows.Forms.ToolStripPanel();
             this.ContentPanel = new System.Windows.Forms.ToolStripContentPanel();
+            this.rb_tpl = new System.Windows.Forms.RadioButton();
+            this.bt_pl_new = new System.Windows.Forms.Button();
+            this.rb_pic = new System.Windows.Forms.RadioButton();
+            this.rb_vod = new System.Windows.Forms.RadioButton();
+            this.rb_voc = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.sp_pan1)).BeginInit();
             this.sp_pan1.Panel1.SuspendLayout();
             this.sp_pan1.Panel2.SuspendLayout();
@@ -114,22 +115,6 @@
             this.sp_pan1.SplitterWidth = 2;
             this.sp_pan1.TabIndex = 4;
             // 
-            // rb_tpl
-            // 
-            this.rb_tpl.Appearance = System.Windows.Forms.Appearance.Button;
-            this.rb_tpl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.rb_tpl.Image = global::X.File.Properties.Resources.order;
-            this.rb_tpl.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.rb_tpl.Location = new System.Drawing.Point(3, 56);
-            this.rb_tpl.Margin = new System.Windows.Forms.Padding(3, 3, 0, 0);
-            this.rb_tpl.Name = "rb_tpl";
-            this.rb_tpl.Size = new System.Drawing.Size(97, 28);
-            this.rb_tpl.TabIndex = 1;
-            this.rb_tpl.Text = "模板表";
-            this.rb_tpl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.rb_tpl.UseVisualStyleBackColor = true;
-            this.rb_tpl.CheckedChanged += new System.EventHandler(this.rb_dir_CheckedChanged);
-            // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.cb_places);
@@ -156,50 +141,6 @@
             this.cb_places.TabIndex = 6;
             this.cb_places.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cb_places_DrawItem);
             this.cb_places.SelectedValueChanged += new System.EventHandler(this.cb_places_SelectedValueChanged);
-            // 
-            // bt_pl_new
-            // 
-            this.bt_pl_new.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.bt_pl_new.Image = global::X.File.Properties.Resources.add;
-            this.bt_pl_new.Location = new System.Drawing.Point(167, 20);
-            this.bt_pl_new.Margin = new System.Windows.Forms.Padding(0);
-            this.bt_pl_new.Name = "bt_pl_new";
-            this.bt_pl_new.Size = new System.Drawing.Size(26, 26);
-            this.bt_pl_new.TabIndex = 7;
-            this.toolTip1.SetToolTip(this.bt_pl_new, "新增采录点");
-            this.bt_pl_new.UseVisualStyleBackColor = true;
-            this.bt_pl_new.Click += new System.EventHandler(this.bt_pl_new_Click);
-            // 
-            // rb_pic
-            // 
-            this.rb_pic.Appearance = System.Windows.Forms.Appearance.Button;
-            this.rb_pic.Image = global::X.File.Properties.Resources.picture;
-            this.rb_pic.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.rb_pic.Location = new System.Drawing.Point(103, 56);
-            this.rb_pic.Margin = new System.Windows.Forms.Padding(3, 3, 0, 0);
-            this.rb_pic.Name = "rb_pic";
-            this.rb_pic.Size = new System.Drawing.Size(96, 28);
-            this.rb_pic.TabIndex = 3;
-            this.rb_pic.Text = "照片";
-            this.rb_pic.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.rb_pic.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.rb_pic.UseVisualStyleBackColor = true;
-            this.rb_pic.CheckedChanged += new System.EventHandler(this.rb_dir_CheckedChanged);
-            // 
-            // rb_vod
-            // 
-            this.rb_vod.Appearance = System.Windows.Forms.Appearance.Button;
-            this.rb_vod.Image = global::X.File.Properties.Resources.video;
-            this.rb_vod.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.rb_vod.Location = new System.Drawing.Point(3, 87);
-            this.rb_vod.Margin = new System.Windows.Forms.Padding(3, 3, 0, 0);
-            this.rb_vod.Name = "rb_vod";
-            this.rb_vod.Size = new System.Drawing.Size(97, 28);
-            this.rb_vod.TabIndex = 0;
-            this.rb_vod.Text = "视频";
-            this.rb_vod.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.rb_vod.UseVisualStyleBackColor = true;
-            this.rb_vod.CheckedChanged += new System.EventHandler(this.rb_dir_CheckedChanged);
             // 
             // tv_dir
             // 
@@ -311,21 +252,6 @@
             this.tsmi_colall.Text = "收缩所有树状菜单";
             this.tsmi_colall.Click += new System.EventHandler(this.tsmi_colall_Click);
             // 
-            // rb_voc
-            // 
-            this.rb_voc.Appearance = System.Windows.Forms.Appearance.Button;
-            this.rb_voc.Image = global::X.File.Properties.Resources.playon;
-            this.rb_voc.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.rb_voc.Location = new System.Drawing.Point(103, 87);
-            this.rb_voc.Margin = new System.Windows.Forms.Padding(3, 3, 0, 0);
-            this.rb_voc.Name = "rb_voc";
-            this.rb_voc.Size = new System.Drawing.Size(96, 28);
-            this.rb_voc.TabIndex = 2;
-            this.rb_voc.Text = "录音";
-            this.rb_voc.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.rb_voc.UseVisualStyleBackColor = true;
-            this.rb_voc.CheckedChanged += new System.EventHandler(this.rb_dir_CheckedChanged);
-            // 
             // sp_pan2
             // 
             this.sp_pan2.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -358,6 +284,7 @@
             // 
             // fv_left
             // 
+            this.fv_left.AllowDrop = true;
             this.fv_left.Dock = System.Windows.Forms.DockStyle.Fill;
             this.fv_left.Location = new System.Drawing.Point(1, 1);
             this.fv_left.Name = "fv_left";
@@ -436,6 +363,7 @@
             this.ms_main.AllowDrop = true;
             this.ms_main.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmi_setting,
+            this.tsmi_help,
             this.tsmi_about,
             this.tsmi_quit});
             this.ms_main.Location = new System.Drawing.Point(0, 0);
@@ -451,6 +379,13 @@
             this.tsmi_setting.Size = new System.Drawing.Size(59, 21);
             this.tsmi_setting.Text = "设置(&S)";
             this.tsmi_setting.Click += new System.EventHandler(this.tsmi_setting_Click);
+            // 
+            // tsmi_help
+            // 
+            this.tsmi_help.Name = "tsmi_help";
+            this.tsmi_help.Size = new System.Drawing.Size(61, 21);
+            this.tsmi_help.Text = "帮助(&H)";
+            this.tsmi_help.Click += new System.EventHandler(this.tsmi_help_Click);
             // 
             // tsmi_quit
             // 
@@ -501,6 +436,82 @@
             this.ContentPanel.Margin = new System.Windows.Forms.Padding(0);
             this.ContentPanel.Size = new System.Drawing.Size(555, 499);
             // 
+            // rb_tpl
+            // 
+            this.rb_tpl.Appearance = System.Windows.Forms.Appearance.Button;
+            this.rb_tpl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.rb_tpl.Image = global::X.File.Properties.Resources.order;
+            this.rb_tpl.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.rb_tpl.Location = new System.Drawing.Point(3, 56);
+            this.rb_tpl.Margin = new System.Windows.Forms.Padding(3, 3, 0, 0);
+            this.rb_tpl.Name = "rb_tpl";
+            this.rb_tpl.Size = new System.Drawing.Size(97, 28);
+            this.rb_tpl.TabIndex = 1;
+            this.rb_tpl.Text = "模板表";
+            this.rb_tpl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.rb_tpl.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.rb_tpl.UseVisualStyleBackColor = true;
+            this.rb_tpl.CheckedChanged += new System.EventHandler(this.rb_dir_CheckedChanged);
+            // 
+            // bt_pl_new
+            // 
+            this.bt_pl_new.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.bt_pl_new.Image = global::X.File.Properties.Resources.add;
+            this.bt_pl_new.Location = new System.Drawing.Point(167, 20);
+            this.bt_pl_new.Margin = new System.Windows.Forms.Padding(0);
+            this.bt_pl_new.Name = "bt_pl_new";
+            this.bt_pl_new.Size = new System.Drawing.Size(26, 26);
+            this.bt_pl_new.TabIndex = 7;
+            this.toolTip1.SetToolTip(this.bt_pl_new, "新增采录点");
+            this.bt_pl_new.UseVisualStyleBackColor = true;
+            this.bt_pl_new.Click += new System.EventHandler(this.bt_pl_new_Click);
+            // 
+            // rb_pic
+            // 
+            this.rb_pic.Appearance = System.Windows.Forms.Appearance.Button;
+            this.rb_pic.Image = global::X.File.Properties.Resources.picture;
+            this.rb_pic.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.rb_pic.Location = new System.Drawing.Point(103, 56);
+            this.rb_pic.Margin = new System.Windows.Forms.Padding(3, 3, 0, 0);
+            this.rb_pic.Name = "rb_pic";
+            this.rb_pic.Size = new System.Drawing.Size(96, 28);
+            this.rb_pic.TabIndex = 3;
+            this.rb_pic.Text = "照片";
+            this.rb_pic.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.rb_pic.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.rb_pic.UseVisualStyleBackColor = true;
+            this.rb_pic.CheckedChanged += new System.EventHandler(this.rb_dir_CheckedChanged);
+            // 
+            // rb_vod
+            // 
+            this.rb_vod.Appearance = System.Windows.Forms.Appearance.Button;
+            this.rb_vod.Image = global::X.File.Properties.Resources.video;
+            this.rb_vod.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.rb_vod.Location = new System.Drawing.Point(3, 87);
+            this.rb_vod.Margin = new System.Windows.Forms.Padding(3, 3, 0, 0);
+            this.rb_vod.Name = "rb_vod";
+            this.rb_vod.Size = new System.Drawing.Size(97, 28);
+            this.rb_vod.TabIndex = 0;
+            this.rb_vod.Text = "视频";
+            this.rb_vod.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.rb_vod.UseVisualStyleBackColor = true;
+            this.rb_vod.CheckedChanged += new System.EventHandler(this.rb_dir_CheckedChanged);
+            // 
+            // rb_voc
+            // 
+            this.rb_voc.Appearance = System.Windows.Forms.Appearance.Button;
+            this.rb_voc.Image = global::X.File.Properties.Resources.playon;
+            this.rb_voc.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.rb_voc.Location = new System.Drawing.Point(103, 87);
+            this.rb_voc.Margin = new System.Windows.Forms.Padding(3, 3, 0, 0);
+            this.rb_voc.Name = "rb_voc";
+            this.rb_voc.Size = new System.Drawing.Size(96, 28);
+            this.rb_voc.TabIndex = 2;
+            this.rb_voc.Text = "录音";
+            this.rb_voc.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.rb_voc.UseVisualStyleBackColor = true;
+            this.rb_voc.CheckedChanged += new System.EventHandler(this.rb_dir_CheckedChanged);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -519,8 +530,6 @@
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Main_FormClosing);
             this.Load += new System.EventHandler(this.Main_Load);
-            this.DragDrop += new System.Windows.Forms.DragEventHandler(this.Main_DragDrop);
-            this.DragEnter += new System.Windows.Forms.DragEventHandler(this.Main_DragEnter);
             this.sp_pan1.Panel1.ResumeLayout(false);
             this.sp_pan1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.sp_pan1)).EndInit();
@@ -581,5 +590,6 @@
         private System.Windows.Forms.ComboBox cb_places;
         private System.Windows.Forms.Button bt_pl_new;
         private System.Windows.Forms.ToolStripStatusLabel tssl_pname;
+        private System.Windows.Forms.ToolStripMenuItem tsmi_help;
     }
 }

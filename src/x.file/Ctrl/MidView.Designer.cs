@@ -32,36 +32,36 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MidView));
             this.tsc_media = new System.Windows.Forms.ToolStripContainer();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
-            this.tsl_file = new System.Windows.Forms.ToolStripLabel();
             this.tsl_ct = new System.Windows.Forms.ToolStripLabel();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.pb_stop = new System.Windows.Forms.PictureBox();
             this.tb_proc = new System.Windows.Forms.TrackBar();
-            this.pb_pause = new System.Windows.Forms.PictureBox();
-            this.pb_play = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.lb_filename = new System.Windows.Forms.Label();
             this.ts_b1 = new System.Windows.Forms.ToolStrip();
-            this.tsb_play = new System.Windows.Forms.ToolStripButton();
-            this.tsb_pause = new System.Windows.Forms.ToolStripButton();
-            this.tsb_stop = new System.Windows.Forms.ToolStripButton();
-            this.tsb_close = new System.Windows.Forms.ToolStripButton();
             this.tsl_time = new System.Windows.Forms.ToolStripLabel();
             this.tsp_name = new System.Windows.Forms.ToolStripLabel();
             this.tm_play = new System.Windows.Forms.Timer(this.components);
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.tsl_file = new System.Windows.Forms.ToolStripLabel();
+            this.pb_stop = new System.Windows.Forms.PictureBox();
+            this.pb_pause = new System.Windows.Forms.PictureBox();
+            this.pb_play = new System.Windows.Forms.PictureBox();
+            this.tsb_play = new System.Windows.Forms.ToolStripButton();
+            this.tsb_pause = new System.Windows.Forms.ToolStripButton();
+            this.tsb_stop = new System.Windows.Forms.ToolStripButton();
+            this.tsb_close = new System.Windows.Forms.ToolStripButton();
             this.tsc_media.BottomToolStripPanel.SuspendLayout();
             this.tsc_media.ContentPanel.SuspendLayout();
             this.tsc_media.TopToolStripPanel.SuspendLayout();
             this.tsc_media.SuspendLayout();
             this.toolStrip2.SuspendLayout();
             this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pb_stop)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tb_proc)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pb_pause)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pb_play)).BeginInit();
             this.panel1.SuspendLayout();
             this.ts_b1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_stop)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_pause)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_play)).BeginInit();
             this.SuspendLayout();
             // 
             // tsc_media
@@ -109,15 +109,6 @@
             this.toolStrip2.Stretch = true;
             this.toolStrip2.TabIndex = 21;
             // 
-            // tsl_file
-            // 
-            this.tsl_file.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.tsl_file.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.tsl_file.Image = ((System.Drawing.Image)(resources.GetObject("tsl_file.Image")));
-            this.tsl_file.Name = "tsl_file";
-            this.tsl_file.Size = new System.Drawing.Size(44, 22);
-            this.tsl_file.Text = "文件：";
-            // 
             // tsl_ct
             // 
             this.tsl_ct.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
@@ -137,20 +128,6 @@
             this.panel2.Size = new System.Drawing.Size(419, 35);
             this.panel2.TabIndex = 2;
             // 
-            // pb_stop
-            // 
-            this.pb_stop.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pb_stop.Enabled = false;
-            this.pb_stop.Image = global::X.File.Properties.Resources.stop;
-            this.pb_stop.Location = new System.Drawing.Point(41, 7);
-            this.pb_stop.Name = "pb_stop";
-            this.pb_stop.Size = new System.Drawing.Size(20, 20);
-            this.pb_stop.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pb_stop.TabIndex = 5;
-            this.pb_stop.TabStop = false;
-            this.toolTip1.SetToolTip(this.pb_stop, "停止");
-            this.pb_stop.Click += new System.EventHandler(this.tsb_stop_Click);
-            // 
             // tb_proc
             // 
             this.tb_proc.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -166,32 +143,6 @@
             this.tb_proc.TickFrequency = 150;
             this.tb_proc.TickStyle = System.Windows.Forms.TickStyle.TopLeft;
             this.tb_proc.Scroll += new System.EventHandler(this.tb_proc_Scroll);
-            // 
-            // pb_pause
-            // 
-            this.pb_pause.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pb_pause.Image = global::X.File.Properties.Resources.pa;
-            this.pb_pause.Location = new System.Drawing.Point(0, 0);
-            this.pb_pause.Name = "pb_pause";
-            this.pb_pause.Size = new System.Drawing.Size(35, 35);
-            this.pb_pause.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pb_pause.TabIndex = 5;
-            this.pb_pause.TabStop = false;
-            this.toolTip1.SetToolTip(this.pb_pause, "暂停");
-            this.pb_pause.Click += new System.EventHandler(this.tsb_pause_Click);
-            // 
-            // pb_play
-            // 
-            this.pb_play.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pb_play.Image = global::X.File.Properties.Resources.p;
-            this.pb_play.Location = new System.Drawing.Point(0, 0);
-            this.pb_play.Name = "pb_play";
-            this.pb_play.Size = new System.Drawing.Size(35, 35);
-            this.pb_play.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pb_play.TabIndex = 5;
-            this.pb_play.TabStop = false;
-            this.toolTip1.SetToolTip(this.pb_play, "播放");
-            this.pb_play.Click += new System.EventHandler(this.tsb_play_Click);
             // 
             // panel1
             // 
@@ -237,6 +188,74 @@
             this.ts_b1.Size = new System.Drawing.Size(419, 25);
             this.ts_b1.Stretch = true;
             this.ts_b1.TabIndex = 1;
+            // 
+            // tsl_time
+            // 
+            this.tsl_time.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.tsl_time.Name = "tsl_time";
+            this.tsl_time.Size = new System.Drawing.Size(44, 22);
+            this.tsl_time.Text = "时间：";
+            // 
+            // tsp_name
+            // 
+            this.tsp_name.Margin = new System.Windows.Forms.Padding(5, 1, 0, 2);
+            this.tsp_name.Name = "tsp_name";
+            this.tsp_name.Size = new System.Drawing.Size(32, 22);
+            this.tsp_name.Text = "名称";
+            // 
+            // tm_play
+            // 
+            this.tm_play.Interval = 10;
+            this.tm_play.Tick += new System.EventHandler(this.tm_play_Tick);
+            // 
+            // tsl_file
+            // 
+            this.tsl_file.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tsl_file.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.tsl_file.Image = ((System.Drawing.Image)(resources.GetObject("tsl_file.Image")));
+            this.tsl_file.Name = "tsl_file";
+            this.tsl_file.Size = new System.Drawing.Size(44, 22);
+            this.tsl_file.Text = "文件：";
+            // 
+            // pb_stop
+            // 
+            this.pb_stop.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pb_stop.Enabled = false;
+            this.pb_stop.Image = global::X.File.Properties.Resources.st;
+            this.pb_stop.Location = new System.Drawing.Point(41, 6);
+            this.pb_stop.Name = "pb_stop";
+            this.pb_stop.Size = new System.Drawing.Size(22, 22);
+            this.pb_stop.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pb_stop.TabIndex = 5;
+            this.pb_stop.TabStop = false;
+            this.toolTip1.SetToolTip(this.pb_stop, "停止");
+            this.pb_stop.Click += new System.EventHandler(this.tsb_stop_Click);
+            // 
+            // pb_pause
+            // 
+            this.pb_pause.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pb_pause.Image = global::X.File.Properties.Resources.pa;
+            this.pb_pause.Location = new System.Drawing.Point(0, 0);
+            this.pb_pause.Name = "pb_pause";
+            this.pb_pause.Size = new System.Drawing.Size(35, 35);
+            this.pb_pause.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pb_pause.TabIndex = 5;
+            this.pb_pause.TabStop = false;
+            this.toolTip1.SetToolTip(this.pb_pause, "暂停");
+            this.pb_pause.Click += new System.EventHandler(this.tsb_pause_Click);
+            // 
+            // pb_play
+            // 
+            this.pb_play.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pb_play.Image = global::X.File.Properties.Resources.p;
+            this.pb_play.Location = new System.Drawing.Point(0, 0);
+            this.pb_play.Name = "pb_play";
+            this.pb_play.Size = new System.Drawing.Size(35, 35);
+            this.pb_play.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pb_play.TabIndex = 5;
+            this.pb_play.TabStop = false;
+            this.toolTip1.SetToolTip(this.pb_play, "播放");
+            this.pb_play.Click += new System.EventHandler(this.tsb_play_Click);
             // 
             // tsb_play
             // 
@@ -284,25 +303,6 @@
             this.tsb_close.Text = "toolStripButton2";
             this.tsb_close.Click += new System.EventHandler(this.tsb_close_Click);
             // 
-            // tsl_time
-            // 
-            this.tsl_time.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.tsl_time.Name = "tsl_time";
-            this.tsl_time.Size = new System.Drawing.Size(44, 22);
-            this.tsl_time.Text = "时间：";
-            // 
-            // tsp_name
-            // 
-            this.tsp_name.Margin = new System.Windows.Forms.Padding(5, 1, 0, 2);
-            this.tsp_name.Name = "tsp_name";
-            this.tsp_name.Size = new System.Drawing.Size(32, 22);
-            this.tsp_name.Text = "名称";
-            // 
-            // tm_play
-            // 
-            this.tm_play.Interval = 10;
-            this.tm_play.Tick += new System.EventHandler(this.tm_play_Tick);
-            // 
             // MidView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -321,13 +321,13 @@
             this.toolStrip2.ResumeLayout(false);
             this.toolStrip2.PerformLayout();
             this.panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pb_stop)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tb_proc)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pb_pause)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pb_play)).EndInit();
             this.panel1.ResumeLayout(false);
             this.ts_b1.ResumeLayout(false);
             this.ts_b1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_stop)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_pause)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_play)).EndInit();
             this.ResumeLayout(false);
 
         }
