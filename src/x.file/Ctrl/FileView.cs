@@ -348,6 +348,7 @@ namespace X.File.Ctrl
                 tsmi_open_in_exp.Visible = true;
                 tsmi_copy.Enabled = tsmi_cut.Enabled = tsmi_rename.Enabled = true;//文件操作
                 tsmi_del.Enabled = true;
+                tsmi_def.Enabled = true;
 
                 var it = items[0];
                 var p = it.Tag.ToString();
@@ -371,6 +372,7 @@ namespace X.File.Ctrl
                             tsmi_use_sol.Visible = true;
                             tsmi_use_aud.Visible = true;
                         }
+                        tsp_p2.Visible = true;
                     }
                     else if (v == "表格")
                     {
@@ -723,8 +725,16 @@ namespace X.File.Ctrl
             var fs = new List<string>();
             foreach (ListViewItem li in lv_files.SelectedItems) fs.Add(li.Tag.ToString());
             var data = new DataObject(DataFormats.FileDrop, fs.ToArray());
-            //data.SetData(DataFormats.StringFormat, fs[0]);
             DoDragDrop(data, DragDropEffects.Copy | DragDropEffects.Move);
+        }
+
+        private void tsmi_def_Click(object sender, EventArgs e)
+        {
+            if (lv_files.SelectedItems.Count == 0) return;
+            var p = lv_files.SelectedItems[0].Tag.ToString();
+
+            if (!System.IO.File.Exists(p)) { MessageBox.Show("文件不存在", this.ParentForm.Text); return; }
+            Process.Start(p);
         }
     }
 
