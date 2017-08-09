@@ -91,6 +91,7 @@ namespace X.File.Ctrl
             lv_files.SmallImageList = App.il20;
             lv_files.LargeImageList = App.il32;
             this.DoubleBuffered = true;
+            tsl_dir.Tag = "";
         }
 
         public void MoveItem(int p)
@@ -306,7 +307,7 @@ namespace X.File.Ctrl
                 fs.Append(it.Tag + "\0");
             }
             fs.Append("\0");
-            if (MessageBox.Show("确认要删除选中项吗？", this.ParentForm.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Warning) != DialogResult.Yes) return;
+            if (MessageBox.Show("确认要删除选中项吗？", App.cfg.AppName, MessageBoxButtons.YesNo, MessageBoxIcon.Warning) != DialogResult.Yes) return;
             copyFile("del", fs.ToString(), 3);
             LoadFile(null);
         }
@@ -318,8 +319,8 @@ namespace X.File.Ctrl
             tsmi_cut.Enabled = false;
             tsmi_del.Enabled = false;
             tsmi_open_in_exp.Visible = false;
-            tsmi_open_vod.Visible = false;
-            tsmi_open_voc.Visible = false;
+            //tsmi_open_vod.Visible = false;
+            //tsmi_open_voc.Visible = false;
             tsmi_parse.Enabled = false;
             tsmi_play.Enabled = false;
             tsmi_rename.Enabled = false;
@@ -332,7 +333,7 @@ namespace X.File.Ctrl
             tsmi_use_sol.Visible = false;
             tsmi_use_yb.Visible = false;
             tsp_p1.Visible = false;
-            tsp_p2.Visible = false;
+            //tsp_p2.Visible = false;
             tsp_p3.Visible = false;
             #endregion
 
@@ -372,13 +373,13 @@ namespace X.File.Ctrl
                             tsmi_use_sol.Visible = true;
                             tsmi_use_aud.Visible = true;
                         }
-                        tsp_p2.Visible = true;
+                        //tsp_p2.Visible = true;
                     }
                     else if (v == "表格")
                     {
                         tsmi_use_excelopen.Visible = true;
-                        tsmi_open_voc.Visible = tsmi_open_vod.Visible = true;
-                        tsp_p2.Visible = true;
+                        //tsmi_open_voc.Visible = tsmi_open_vod.Visible = true;
+                        //tsp_p2.Visible = true;
                         tsp_p3.Visible = true;
                         tsp_p4.Visible = true;
                     }
@@ -399,9 +400,9 @@ namespace X.File.Ctrl
                 tsmi_rename.Enabled = false;
                 tsmi_use_excelopen.Visible = false;
                 tsmi_use_wordopen.Visible = false;
-                tsmi_open_voc.Visible = false;
+                //tsmi_open_voc.Visible = false;
                 tsp_p3.Visible = false;
-                tsmi_open_vod.Visible = false;
+                //tsmi_open_vod.Visible = false;
             }
         }
 
@@ -433,7 +434,7 @@ namespace X.File.Ctrl
             if (lv_files.SelectedItems.Count == 0) return;
             var p = lv_files.SelectedItems[0].Tag.ToString();
             if (System.IO.File.Exists(p)) Process.Start(p);
-            else MessageBox.Show("文件不存在", this.ParentForm.Text);
+            else MessageBox.Show("文件不存在", App.cfg.AppName);
         }
 
         private void tsmi_open_excel_Click(object sender, EventArgs e)
@@ -441,7 +442,7 @@ namespace X.File.Ctrl
             if (lv_files.SelectedItems.Count == 0) return;
             var p = lv_files.SelectedItems[0].Tag.ToString();
             if (System.IO.File.Exists(p)) Process.Start(p);
-            else MessageBox.Show("文件不存在", this.ParentForm.Text);
+            else MessageBox.Show("文件不存在", App.cfg.AppName);
         }
 
         private void tsmi_use_wordopen_Click(object sender, EventArgs e)
@@ -449,7 +450,7 @@ namespace X.File.Ctrl
             if (lv_files.SelectedItems.Count == 0) return;
             var p = lv_files.SelectedItems[0].Tag.ToString();
             if (System.IO.File.Exists(p)) Process.Start(p);
-            else MessageBox.Show("文件不存在", this.ParentForm.Text);
+            else MessageBox.Show("文件不存在", App.cfg.AppName);
         }
 
         private void tsmi_use_excelopen_Click(object sender, EventArgs e)
@@ -457,7 +458,7 @@ namespace X.File.Ctrl
             if (lv_files.SelectedItems.Count == 0) return;
             var p = lv_files.SelectedItems[0].Tag.ToString();
             if (System.IO.File.Exists(p)) Process.Start(p);
-            else MessageBox.Show("文件不存在", this.ParentForm.Text);
+            else MessageBox.Show("文件不存在", App.cfg.AppName);
         }
 
         private void tsmi_open_in_exp_Click(object sender, EventArgs e)
@@ -631,65 +632,65 @@ namespace X.File.Ctrl
 
         private void tsmi_use_aud_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(App.cfg.ExApps.Audac)) { if (MessageBox.Show("Audacity软件未配置，是否立即配置？", this.ParentForm.Text, MessageBoxButtons.YesNo) == DialogResult.Yes) ShowSetting?.Invoke(); return; }
-            if (!System.IO.File.Exists(App.cfg.ExApps.Audac)) { if (MessageBox.Show("Audacity软件配置错误，是否立即配置？", this.ParentForm.Text, MessageBoxButtons.YesNo) == DialogResult.Yes) ShowSetting?.Invoke(); return; }
+            if (string.IsNullOrEmpty(App.cfg.ExApps.Audac)) { if (MessageBox.Show("Audacity软件未配置，是否立即配置？", App.cfg.AppName, MessageBoxButtons.YesNo) == DialogResult.Yes) ShowSetting?.Invoke(); return; }
+            if (!System.IO.File.Exists(App.cfg.ExApps.Audac)) { if (MessageBox.Show("Audacity软件配置错误，是否立即配置？", App.cfg.AppName, MessageBoxButtons.YesNo) == DialogResult.Yes) ShowSetting?.Invoke(); return; }
 
             if (lv_files.SelectedItems.Count == 0) return;
             var p = lv_files.SelectedItems[0].Tag.ToString();
 
-            if (!System.IO.File.Exists(p)) { MessageBox.Show("文件不存在", this.ParentForm.Text); return; }
+            if (!System.IO.File.Exists(p)) { MessageBox.Show("文件不存在", App.cfg.AppName); return; }
 
             Process.Start(App.cfg.ExApps.Audac, p);
         }
 
         private void tsmi_use_praat_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(App.cfg.ExApps.Praat)) { if (MessageBox.Show("Praat软件未配置，是否立即配置？", this.ParentForm.Text, MessageBoxButtons.YesNo) == DialogResult.Yes) ShowSetting?.Invoke(); return; }
-            if (!System.IO.File.Exists(App.cfg.ExApps.Audac)) { if (MessageBox.Show("Praat软件配置错误，是否立即配置？", this.ParentForm.Text, MessageBoxButtons.YesNo) == DialogResult.Yes) ShowSetting?.Invoke(); return; }
+            if (string.IsNullOrEmpty(App.cfg.ExApps.Praat)) { if (MessageBox.Show("Praat软件未配置，是否立即配置？", App.cfg.AppName, MessageBoxButtons.YesNo) == DialogResult.Yes) ShowSetting?.Invoke(); return; }
+            if (!System.IO.File.Exists(App.cfg.ExApps.Audac)) { if (MessageBox.Show("Praat软件配置错误，是否立即配置？", App.cfg.AppName, MessageBoxButtons.YesNo) == DialogResult.Yes) ShowSetting?.Invoke(); return; }
 
             if (lv_files.SelectedItems.Count == 0) return;
             var p = lv_files.SelectedItems[0].Tag.ToString();
 
-            if (!System.IO.File.Exists(p)) { MessageBox.Show("文件不存在", this.ParentForm.Text); return; }
+            if (!System.IO.File.Exists(p)) { MessageBox.Show("文件不存在", App.cfg.AppName); return; }
 
             Process.Start(App.cfg.ExApps.Praat, "--open " + p);
         }
 
         private void tsmi_use_yb_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(App.cfg.ExApps.YuBao)) { if (MessageBox.Show("语宝标注软件未配置，是否立即配置？", this.ParentForm.Text, MessageBoxButtons.YesNo) == DialogResult.Yes) ShowSetting?.Invoke(); return; }
-            if (!System.IO.File.Exists(App.cfg.ExApps.Audac)) { if (MessageBox.Show("语宝标注软件配置错误，是否立即配置？", this.ParentForm.Text, MessageBoxButtons.YesNo) == DialogResult.Yes) ShowSetting?.Invoke(); return; }
+            if (string.IsNullOrEmpty(App.cfg.ExApps.YuBao)) { if (MessageBox.Show("语宝标注软件未配置，是否立即配置？", App.cfg.AppName, MessageBoxButtons.YesNo) == DialogResult.Yes) ShowSetting?.Invoke(); return; }
+            if (!System.IO.File.Exists(App.cfg.ExApps.Audac)) { if (MessageBox.Show("语宝标注软件配置错误，是否立即配置？", App.cfg.AppName, MessageBoxButtons.YesNo) == DialogResult.Yes) ShowSetting?.Invoke(); return; }
 
             if (lv_files.SelectedItems.Count == 0) return;
             var p = lv_files.SelectedItems[0].Tag.ToString();
 
-            if (!System.IO.File.Exists(p)) { MessageBox.Show("文件不存在", this.ParentForm.Text); return; }
+            if (!System.IO.File.Exists(p)) { MessageBox.Show("文件不存在", App.cfg.AppName); return; }
 
             Process.Start(App.cfg.ExApps.YuBao, "inplace_open=\"" + p + "\"");
         }
 
         private void tsmi_use_sol_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(App.cfg.ExApps.Solveig)) { if (MessageBox.Show("SolveigMM软件未配置，是否立即配置？", this.ParentForm.Text, MessageBoxButtons.YesNo) == DialogResult.Yes) ShowSetting?.Invoke(); return; }
-            if (!System.IO.File.Exists(App.cfg.ExApps.Audac)) { if (MessageBox.Show("SolveigMM软件配置错误，是否立即配置？", this.ParentForm.Text, MessageBoxButtons.YesNo) == DialogResult.Yes) ShowSetting?.Invoke(); return; }
+            if (string.IsNullOrEmpty(App.cfg.ExApps.Solveig)) { if (MessageBox.Show("SolveigMM软件未配置，是否立即配置？", App.cfg.AppName, MessageBoxButtons.YesNo) == DialogResult.Yes) ShowSetting?.Invoke(); return; }
+            if (!System.IO.File.Exists(App.cfg.ExApps.Audac)) { if (MessageBox.Show("SolveigMM软件配置错误，是否立即配置？", App.cfg.AppName, MessageBoxButtons.YesNo) == DialogResult.Yes) ShowSetting?.Invoke(); return; }
 
             if (lv_files.SelectedItems.Count == 0) return;
             var p = lv_files.SelectedItems[0].Tag.ToString();
 
-            if (!System.IO.File.Exists(p)) { MessageBox.Show("文件不存在", this.ParentForm.Text); return; }
+            if (!System.IO.File.Exists(p)) { MessageBox.Show("文件不存在", App.cfg.AppName); return; }
 
             Process.Start(App.cfg.ExApps.Solveig, p);
         }
 
         private void tsmi_use_copen_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(App.cfg.ExApps.YuBao)) { if (MessageBox.Show("语宝标注软件未配置，是否立即配置？", this.ParentForm.Text, MessageBoxButtons.YesNo) == DialogResult.Yes) ShowSetting?.Invoke(); return; }
-            if (!System.IO.File.Exists(App.cfg.ExApps.YuBao)) { if (MessageBox.Show("语宝标注软件配置错误，是否立即配置？", this.ParentForm.Text, MessageBoxButtons.YesNo) == DialogResult.Yes) ShowSetting?.Invoke(); return; }
+            if (string.IsNullOrEmpty(App.cfg.ExApps.YuBao)) { if (MessageBox.Show("语宝标注软件未配置，是否立即配置？", App.cfg.AppName, MessageBoxButtons.YesNo) == DialogResult.Yes) ShowSetting?.Invoke(); return; }
+            if (!System.IO.File.Exists(App.cfg.ExApps.YuBao)) { if (MessageBox.Show("语宝标注软件配置错误，是否立即配置？", App.cfg.AppName, MessageBoxButtons.YesNo) == DialogResult.Yes) ShowSetting?.Invoke(); return; }
 
             if (lv_files.SelectedItems.Count == 0) return;
             var p = lv_files.SelectedItems[0].Tag.ToString();
 
-            if (!System.IO.File.Exists(p)) { MessageBox.Show("文件不存在", this.ParentForm.Text); return; }
+            if (!System.IO.File.Exists(p)) { MessageBox.Show("文件不存在", App.cfg.AppName); return; }
 
             var dir = p.Substring(0, p.LastIndexOf('.'));
             Directory.CreateDirectory(dir);
@@ -704,7 +705,7 @@ namespace X.File.Ctrl
         {
             var fs = e.Data.GetData(DataFormats.FileDrop) as string[];
             if (fs == null || fs.Length == 0) return;
-            var dr = MessageBox.Show("文件拖放中，共" + fs.Length + "个文件，是否移动？\r\n是：移动文件到当前目录\r\n否：复制文件到当前目录\r\n取消：取消操作", this.ParentForm.Text, MessageBoxButtons.YesNoCancel);
+            var dr = MessageBox.Show("文件拖放中，共" + fs.Length + "个文件，是否移动？\r\n是：移动文件到当前目录\r\n否：复制文件到当前目录\r\n取消：取消操作", App.cfg.AppName, MessageBoxButtons.YesNoCancel);
             if (dr == DialogResult.Cancel) return;
             var files = "";
             foreach (var f in fs) files += f + "\0";
@@ -733,7 +734,7 @@ namespace X.File.Ctrl
             if (lv_files.SelectedItems.Count == 0) return;
             var p = lv_files.SelectedItems[0].Tag.ToString();
 
-            if (!System.IO.File.Exists(p)) { MessageBox.Show("文件不存在", this.ParentForm.Text); return; }
+            if (!System.IO.File.Exists(p)) { MessageBox.Show("文件不存在", App.cfg.AppName); return; }
             Process.Start(p);
         }
     }

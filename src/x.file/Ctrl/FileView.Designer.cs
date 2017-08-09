@@ -37,6 +37,14 @@
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
             this.tsl_dir = new System.Windows.Forms.ToolStripLabel();
             this.tsl_dir_tip = new System.Windows.Forms.ToolStripLabel();
+            this.lv_files = new X.File.Ctrl.XcListView();
+            this.ch_no = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.ch_name = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.ch_tp = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.ct_tl = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.ch_rote = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.ch_size = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.ch_mt = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.cms_tree = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmi_play = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmi_st_play = new System.Windows.Forms.ToolStripMenuItem();
@@ -49,9 +57,6 @@
             this.tsmi_use_praat = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmi_use_excelopen = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmi_use_wordopen = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsp_p2 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsmi_open_vod = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmi_open_voc = new System.Windows.Forms.ToolStripMenuItem();
             this.tsp_p3 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmi_open_in_exp = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmi_newdir = new System.Windows.Forms.ToolStripMenuItem();
@@ -81,14 +86,6 @@
             this.大图标ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.列表视图LToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.平铺视图ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.lv_files = new X.File.Ctrl.XcListView();
-            this.ch_no = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.ch_name = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.ch_tp = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.ct_tl = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.ch_rote = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.ch_size = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.ch_mt = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tsc_c1.BottomToolStripPanel.SuspendLayout();
             this.tsc_c1.ContentPanel.SuspendLayout();
             this.tsc_c1.TopToolStripPanel.SuspendLayout();
@@ -156,6 +153,84 @@
             this.tsl_dir_tip.Size = new System.Drawing.Size(56, 21);
             this.tsl_dir_tip.Text = "文件数：";
             // 
+            // lv_files
+            // 
+            this.lv_files.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lv_files.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.ch_no,
+            this.ch_name,
+            this.ch_tp,
+            this.ct_tl,
+            this.ch_rote,
+            this.ch_size,
+            this.ch_mt});
+            this.lv_files.ContextMenuStrip = this.cms_tree;
+            this.lv_files.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lv_files.FullRowSelect = true;
+            this.lv_files.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.lv_files.HideSelection = false;
+            this.lv_files.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
+            listViewItem1});
+            this.lv_files.LabelWrap = false;
+            this.lv_files.Location = new System.Drawing.Point(0, 0);
+            this.lv_files.Margin = new System.Windows.Forms.Padding(0);
+            this.lv_files.Name = "lv_files";
+            this.lv_files.OwnerDraw = true;
+            this.lv_files.ShowItemToolTips = true;
+            this.lv_files.Size = new System.Drawing.Size(684, 390);
+            this.lv_files.TabIndex = 19;
+            this.lv_files.UseCompatibleStateImageBehavior = false;
+            this.lv_files.View = System.Windows.Forms.View.Details;
+            this.lv_files.AfterLabelEdit += new System.Windows.Forms.LabelEditEventHandler(this.lv_files_AfterLabelEdit);
+            this.lv_files.DrawColumnHeader += new System.Windows.Forms.DrawListViewColumnHeaderEventHandler(this.lv_files_DrawColumnHeader);
+            this.lv_files.DrawItem += new System.Windows.Forms.DrawListViewItemEventHandler(this.lv_files_DrawItem);
+            this.lv_files.DrawSubItem += new System.Windows.Forms.DrawListViewSubItemEventHandler(this.lv_files_DrawSubItem);
+            this.lv_files.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.lv_files_ItemDrag);
+            this.lv_files.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.lv_files_ItemSelectionChanged);
+            this.lv_files.Enter += new System.EventHandler(this.lv_files_Enter);
+            this.lv_files.KeyUp += new System.Windows.Forms.KeyEventHandler(this.lv_files_KeyUp);
+            this.lv_files.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lv_files_MouseDoubleClick);
+            // 
+            // ch_no
+            // 
+            this.ch_no.Text = "#";
+            this.ch_no.Width = 30;
+            // 
+            // ch_name
+            // 
+            this.ch_name.Text = "名称";
+            this.ch_name.Width = 120;
+            // 
+            // ch_tp
+            // 
+            this.ch_tp.Text = "类型";
+            this.ch_tp.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.ch_tp.Width = 50;
+            // 
+            // ct_tl
+            // 
+            this.ct_tl.Text = "时长";
+            this.ct_tl.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.ct_tl.Width = 80;
+            // 
+            // ch_rote
+            // 
+            this.ch_rote.Text = "分辨率";
+            this.ch_rote.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.ch_rote.Width = 100;
+            // 
+            // ch_size
+            // 
+            this.ch_size.Text = "大小";
+            this.ch_size.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.ch_size.Width = 80;
+            // 
+            // ch_mt
+            // 
+            this.ch_mt.Text = "修改时间";
+            this.ch_mt.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.ch_mt.Width = 120;
+            // 
             // cms_tree
             // 
             this.cms_tree.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -170,9 +245,6 @@
             this.tsmi_use_praat,
             this.tsmi_use_excelopen,
             this.tsmi_use_wordopen,
-            this.tsp_p2,
-            this.tsmi_open_vod,
-            this.tsmi_open_voc,
             this.tsp_p3,
             this.tsmi_open_in_exp,
             this.tsmi_newdir,
@@ -186,7 +258,7 @@
             this.tsp_p5,
             this.tsmi_reload});
             this.cms_tree.Name = "cms_tree";
-            this.cms_tree.Size = new System.Drawing.Size(233, 518);
+            this.cms_tree.Size = new System.Drawing.Size(233, 468);
             this.cms_tree.Opening += new System.ComponentModel.CancelEventHandler(this.cms_tree_Opening);
             // 
             // tsmi_play
@@ -265,25 +337,6 @@
             this.tsmi_use_wordopen.Size = new System.Drawing.Size(232, 22);
             this.tsmi_use_wordopen.Text = "用Word打开";
             this.tsmi_use_wordopen.Click += new System.EventHandler(this.tsmi_use_wordopen_Click);
-            // 
-            // tsp_p2
-            // 
-            this.tsp_p2.Name = "tsp_p2";
-            this.tsp_p2.Size = new System.Drawing.Size(229, 6);
-            // 
-            // tsmi_open_vod
-            // 
-            this.tsmi_open_vod.Name = "tsmi_open_vod";
-            this.tsmi_open_vod.Size = new System.Drawing.Size(232, 22);
-            this.tsmi_open_vod.Text = "打开视频文件夹";
-            this.tsmi_open_vod.Click += new System.EventHandler(this.tsmi_open_vod_Click);
-            // 
-            // tsmi_open_voc
-            // 
-            this.tsmi_open_voc.Name = "tsmi_open_voc";
-            this.tsmi_open_voc.Size = new System.Drawing.Size(232, 22);
-            this.tsmi_open_voc.Text = "打开录音文件夹";
-            this.tsmi_open_voc.Click += new System.EventHandler(this.tsmi_open_voc_Click);
             // 
             // tsp_p3
             // 
@@ -547,84 +600,6 @@
             this.平铺视图ToolStripMenuItem.Text = "平铺视图(&T)";
             this.平铺视图ToolStripMenuItem.Click += new System.EventHandler(this.View_ToolStripMenuItem_Click);
             // 
-            // lv_files
-            // 
-            this.lv_files.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.lv_files.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.ch_no,
-            this.ch_name,
-            this.ch_tp,
-            this.ct_tl,
-            this.ch_rote,
-            this.ch_size,
-            this.ch_mt});
-            this.lv_files.ContextMenuStrip = this.cms_tree;
-            this.lv_files.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lv_files.FullRowSelect = true;
-            this.lv_files.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
-            this.lv_files.HideSelection = false;
-            this.lv_files.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1});
-            this.lv_files.LabelWrap = false;
-            this.lv_files.Location = new System.Drawing.Point(0, 0);
-            this.lv_files.Margin = new System.Windows.Forms.Padding(0);
-            this.lv_files.Name = "lv_files";
-            this.lv_files.OwnerDraw = true;
-            this.lv_files.ShowItemToolTips = true;
-            this.lv_files.Size = new System.Drawing.Size(684, 390);
-            this.lv_files.TabIndex = 19;
-            this.lv_files.UseCompatibleStateImageBehavior = false;
-            this.lv_files.View = System.Windows.Forms.View.Details;
-            this.lv_files.AfterLabelEdit += new System.Windows.Forms.LabelEditEventHandler(this.lv_files_AfterLabelEdit);
-            this.lv_files.DrawColumnHeader += new System.Windows.Forms.DrawListViewColumnHeaderEventHandler(this.lv_files_DrawColumnHeader);
-            this.lv_files.DrawItem += new System.Windows.Forms.DrawListViewItemEventHandler(this.lv_files_DrawItem);
-            this.lv_files.DrawSubItem += new System.Windows.Forms.DrawListViewSubItemEventHandler(this.lv_files_DrawSubItem);
-            this.lv_files.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.lv_files_ItemDrag);
-            this.lv_files.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.lv_files_ItemSelectionChanged);
-            this.lv_files.Enter += new System.EventHandler(this.lv_files_Enter);
-            this.lv_files.KeyUp += new System.Windows.Forms.KeyEventHandler(this.lv_files_KeyUp);
-            this.lv_files.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lv_files_MouseDoubleClick);
-            // 
-            // ch_no
-            // 
-            this.ch_no.Text = "#";
-            this.ch_no.Width = 30;
-            // 
-            // ch_name
-            // 
-            this.ch_name.Text = "名称";
-            this.ch_name.Width = 120;
-            // 
-            // ch_tp
-            // 
-            this.ch_tp.Text = "类型";
-            this.ch_tp.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.ch_tp.Width = 50;
-            // 
-            // ct_tl
-            // 
-            this.ct_tl.Text = "时长";
-            this.ct_tl.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.ct_tl.Width = 80;
-            // 
-            // ch_rote
-            // 
-            this.ch_rote.Text = "分辨率";
-            this.ch_rote.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.ch_rote.Width = 100;
-            // 
-            // ch_size
-            // 
-            this.ch_size.Text = "大小";
-            this.ch_size.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.ch_size.Width = 80;
-            // 
-            // ch_mt
-            // 
-            this.ch_mt.Text = "修改时间";
-            this.ch_mt.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.ch_mt.Width = 120;
-            // 
             // FileView
             // 
             this.AllowDrop = true;
@@ -683,9 +658,6 @@
         private System.Windows.Forms.ToolStripMenuItem tsmi_use_excelopen;
         private System.Windows.Forms.ToolStripMenuItem tsmi_use_wordopen;
         private System.Windows.Forms.ToolStripSeparator tsp_p3;
-        private System.Windows.Forms.ToolStripMenuItem tsmi_open_vod;
-        private System.Windows.Forms.ToolStripMenuItem tsmi_open_voc;
-        private System.Windows.Forms.ToolStripSeparator tsp_p2;
         private System.Windows.Forms.ToolStripMenuItem tsmi_reload;
         private System.Windows.Forms.ToolStripMenuItem tsmi_del;
         private System.Windows.Forms.ToolStripMenuItem tsmi_play;

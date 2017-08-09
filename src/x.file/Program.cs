@@ -20,22 +20,20 @@ namespace X.File
 
             App.LoadConfig();
 
-            if (App.cfg.Places.Count == 0)
-            {
-                MessageBox.Show("第一次使用请添加一个地点和工作目录", "系统提示");
-                var pl = new Place();
-                if (pl.ShowDialog() != DialogResult.OK) return;
+            var msg = "";
+            if (App.cfg.Places.Count == 0) msg = "请点击“新增”按钮\r\n选择“需交文件电子版”文件夹！";
+            //else if (!Directory.Exists(App.cfg.Cp.Work)) msg = "采录点【" + App.cfg.Cp.Name + "】工作目录【" + App.cfg.Cp.Work + "】不存在，请重新选择或设置采录点！";
 
-                var p = new App.Config.Place() { Work = pl.PDir, Name = pl.PName };
-                App.cfg.AddPlace(p);
+            if (!string.IsNullOrEmpty(msg) || App.cfg.Places.Count() > 1)
+            {
+                if (!string.IsNullOrEmpty(msg)) MessageBox.Show(msg, App.cfg.AppName);
+                var pl = new Places();
+                if (pl.ShowDialog() != DialogResult.OK) return;
+                App.cfg.CpId = pl.Cpid;
             }
-
-            if (string.IsNullOrEmpty(App.cfg.Cp.Work) || !Directory.Exists(App.cfg.Cp.Work))
+            else if (App.cfg.Places.Count() == 1)
             {
-                MessageBox.Show("工作文件夹【" + App.cfg.Cp.Work + "】不存在，请重新设置", "系统提示");
-                var pl = new Place() { PName = App.cfg.Cp.Name, PDir = "" };
-                if (pl.ShowDialog() != DialogResult.OK) return;
-                App.cfg.Cp.Work = pl.PDir;
+                App.cfg.CpId = App.cfg.Places[0].ID;
             }
 
             App.SaveConfig();

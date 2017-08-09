@@ -15,6 +15,8 @@ namespace X.File
         public About()
         {
             InitializeComponent();
+            lb_appname.Text = App.cfg.AppName;
+            lb_appver.Text = "V" + App.cfg.AppVer;
         }
 
         private void lk_link_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

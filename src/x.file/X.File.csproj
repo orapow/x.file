@@ -140,11 +140,11 @@
     <Compile Include="Main.Designer.cs">
       <DependentUpon>Main.cs</DependentUpon>
     </Compile>
-    <Compile Include="Place.cs">
+    <Compile Include="Places.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Place.Designer.cs">
-      <DependentUpon>Place.cs</DependentUpon>
+    <Compile Include="Places.Designer.cs">
+      <DependentUpon>Places.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -180,8 +180,8 @@
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Place.resx">
-      <DependentUpon>Place.cs</DependentUpon>
+    <EmbeddedResource Include="Places.resx">
+      <DependentUpon>Places.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

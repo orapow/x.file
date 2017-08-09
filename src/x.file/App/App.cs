@@ -35,26 +35,33 @@ namespace X.File
 
         public class Config
         {
+            public string AppName { get { return Application.ProductName; } }
+            public string AppVer { get { return Application.ProductVersion; } }
             public View Views { get; set; }
             public ExApp ExApps { get; set; }
             public List<Place> Places { get; set; }
             public string CpId { get; set; }
-            [X.Json.JsonIgnore]
+
+            Place place = null;
+            [Json.JsonIgnore]
             public Place Cp
             {
                 get
                 {
                     if (Places.Count == 0) return null;
-                    var p = Places.FirstOrDefault(o => o.ID == CpId);
-                    if (p == null) p = Places[0];
-                    CpId = p.ID;
-                    return p;
+                    if (place == null || place.ID != CpId)
+                    {
+                        place = Places.FirstOrDefault(o => o.ID == CpId);
+                        if (place == null) place = Places[0];
+                        CpId = place.ID;
+                    }
+                    return place;
                 }
             }
 
             public string AddPlace(Place p)
             {
-                if (Places.FirstOrDefault(o => o.Name == p.Name) != null) return "";
+                //if (Places.FirstOrDefault(o => o.Name == p.Name) != null) return "";
                 p.ID = Guid.NewGuid().ToString();
                 Places.Add(p);
                 SaveConfig();
@@ -129,7 +136,7 @@ namespace X.File
                 }
                 public override string ToString()
                 {
-                    return Name + "　" + Work;
+                    return Name + "　 " + Work;
                 }
             }
         }

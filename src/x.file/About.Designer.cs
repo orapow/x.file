@@ -29,22 +29,22 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(About));
-            this.label1 = new System.Windows.Forms.Label();
+            this.lb_appname = new System.Windows.Forms.Label();
             this.pb_icon = new System.Windows.Forms.PictureBox();
             this.lk_link = new System.Windows.Forms.LinkLabel();
-            this.label2 = new System.Windows.Forms.Label();
+            this.lb_appver = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pb_icon)).BeginInit();
             this.SuspendLayout();
             // 
-            // label1
+            // lb_appname
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("微软雅黑", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(73, 12);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(126, 25);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "语保文件管家";
+            this.lb_appname.AutoSize = true;
+            this.lb_appname.Font = new System.Drawing.Font("微软雅黑", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lb_appname.Location = new System.Drawing.Point(73, 12);
+            this.lb_appname.Name = "lb_appname";
+            this.lb_appname.Size = new System.Drawing.Size(126, 25);
+            this.lb_appname.TabIndex = 0;
+            this.lb_appname.Text = "语保文件管家";
             // 
             // pb_icon
             // 
@@ -67,26 +67,26 @@
             this.lk_link.Text = "语保网";
             this.lk_link.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lk_link_LinkClicked);
             // 
-            // label2
+            // lb_appver
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label2.Location = new System.Drawing.Point(76, 46);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(40, 16);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "V1.5";
+            this.lb_appver.AutoSize = true;
+            this.lb_appver.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lb_appver.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.lb_appver.Location = new System.Drawing.Point(76, 46);
+            this.lb_appver.Name = "lb_appver";
+            this.lb_appver.Size = new System.Drawing.Size(40, 16);
+            this.lb_appver.TabIndex = 3;
+            this.lb_appver.Text = "V1.5";
             // 
             // About
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(304, 78);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.lb_appver);
             this.Controls.Add(this.lk_link);
             this.Controls.Add(this.pb_icon);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lb_appname);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.MaximizeBox = false;
             this.Name = "About";
@@ -100,9 +100,9 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lb_appname;
         private System.Windows.Forms.PictureBox pb_icon;
         private System.Windows.Forms.LinkLabel lk_link;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lb_appver;
     }
 }

@@ -20,9 +20,11 @@ namespace X.File
         private void Main_Load(object sender, EventArgs e)
         {
             tv_dir.ImageList = App.il20;
-            tssl_pname.Text = App.cfg.Cp.Name;
+            Text = App.cfg.AppName;
+            cb_places.Items.Clear();
             foreach (var p in App.cfg.Places) cb_places.Items.Add(p);
-            cb_places.SelectedIndex = 0;
+            cb_places.SelectedIndex = App.cfg.Places.FindIndex(o => o.ID == App.cfg.CpId);
+            tssl_pname.Text = App.cfg.Cp.Name;
         }
 
         void Init()
@@ -252,7 +254,7 @@ namespace X.File
             p = App.cfg.Cp.Work + "\\" + p.Replace("视频\\", "模板表\\").Replace("录音\\", "模板表\\");
             if (System.IO.File.Exists(p + ".doc")) Process.Start(p + ".doc");
             else if (System.IO.File.Exists(p + ".docx")) Process.Start(p + ".docx");
-            else MessageBox.Show("文件不存在", Text);
+            else MessageBox.Show("文件不存在", App.cfg.AppName);
         }
 
         private void tsmi_open_excel_Click(object sender, EventArgs e)
@@ -262,7 +264,7 @@ namespace X.File
             var p = tn.FullPath;
             p = App.cfg.Cp.Work + "\\" + p.Replace("视频\\", "模板表\\").Replace("录音\\", "模板表\\");
             if (System.IO.File.Exists(p + ".xls") || (System.IO.File.Exists(p + ".xlsx"))) xls_View.LoadTable(p + ".xls");
-            else MessageBox.Show("文件不存在", Text);
+            else MessageBox.Show("文件不存在", App.cfg.AppName);
         }
 
         private void xls_View_Close()
@@ -284,7 +286,7 @@ namespace X.File
             var p = tn.FullPath;
             p = App.cfg.Cp.Work + "\\" + p.Replace("视频\\", "模板表\\").Replace("录音\\", "模板表\\");
             if (System.IO.File.Exists(p)) Process.Start(p);
-            else MessageBox.Show("文件不存在", Text);
+            else MessageBox.Show("文件不存在", App.cfg.AppName);
         }
 
         private void tsmi_use_excelopen_Click(object sender, EventArgs e)
@@ -294,7 +296,7 @@ namespace X.File
             var p = tn.FullPath;
             p = App.cfg.Cp.Work + "\\" + p.Replace("视频\\", "模板表\\").Replace("录音\\", "模板表\\");
             if (System.IO.File.Exists(p)) Process.Start(p);
-            else MessageBox.Show("文件不存在", Text);
+            else MessageBox.Show("文件不存在", App.cfg.AppName);
         }
 
         private void tsmi_reload_Click(object sender, EventArgs e)
@@ -372,14 +374,24 @@ namespace X.File
 
         private void bt_pl_new_Click(object sender, EventArgs e)
         {
-            var pl = new Place();
-            if (pl.ShowDialog() != DialogResult.OK) return;
+            var pl = new Places();
+            var dr = pl.ShowDialog();
 
-            var p = new App.Config.Place() { Name = pl.PName, Work = pl.PDir };
-            App.cfg.AddPlace(p);
+            cb_places.Items.Clear();
+            foreach (var p in App.cfg.Places) cb_places.Items.Add(p);
 
-            cb_places.Items.Add(p);
-            cb_places.SelectedItem = p;
+            if (dr == DialogResult.OK) cb_places.SelectedIndex = App.cfg.Places.FindIndex(o => o.ID == pl.Cpid);
+            else if (App.cfg.Places.Count == 0)
+            {
+                MessageBox.Show("没有添加采录点，请添加！", App.cfg.AppName);
+                bt_pl_new_Click(null, null);
+            }
+            else
+            {
+                cb_places.SelectedIndex = App.cfg.Places.FindIndex(o => o.ID == App.cfg.CpId);
+            }
+            //else tv_dir.Nodes.Clear();
+
         }
 
         private void cb_places_SelectedValueChanged(object sender, EventArgs e)
@@ -387,6 +399,12 @@ namespace X.File
             if (cb_places.SelectedIndex < 0) return;
             var p = cb_places.SelectedItem as App.Config.Place;
             if (p == null) return;
+
+            if (!Directory.Exists(p.Work))
+            {
+                MessageBox.Show("采录点【" + p.Name + "】工作目录【" + p.Work + "】不存在，请重新设置！", App.cfg.AppName);
+                return;
+            }
 
             SaveConfig();
             App.cfg.CpId = p.ID;
@@ -421,7 +439,8 @@ namespace X.File
 
         private void tsmi_help_Click(object sender, EventArgs e)
         {
-            Process.Start(Application.StartupPath + "\\帮助文档.pdf");
+            if (System.IO.File.Exists(Application.StartupPath + "\\帮助文档.pdf")) Process.Start(Application.StartupPath + "\\帮助文档.pdf");
+            else MessageBox.Show("没有找到帮助文档", App.cfg.AppName);
         }
     }
 }

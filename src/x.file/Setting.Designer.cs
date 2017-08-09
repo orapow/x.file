@@ -44,10 +44,6 @@
             this.tb_vods = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.tb_pics = new System.Windows.Forms.TextBox();
-            this.dgv_exts = new System.Windows.Forms.DataGridView();
-            this.ext = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.view = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.op = new System.Windows.Forms.DataGridViewButtonColumn();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -61,15 +57,9 @@
             this.bt_app_praat = new System.Windows.Forms.Button();
             this.tb_app_aud = new System.Windows.Forms.TextBox();
             this.bt_app_aud = new System.Windows.Forms.Button();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.lb_places = new System.Windows.Forms.ListBox();
-            this.btn_new = new System.Windows.Forms.Button();
-            this.btn_remove = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgv_exts)).BeginInit();
             this.groupBox3.SuspendLayout();
-            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -100,7 +90,7 @@
             // bt_ok
             // 
             this.bt_ok.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.bt_ok.Location = new System.Drawing.Point(592, 420);
+            this.bt_ok.Location = new System.Drawing.Point(285, 460);
             this.bt_ok.Name = "bt_ok";
             this.bt_ok.Size = new System.Drawing.Size(66, 29);
             this.bt_ok.TabIndex = 2;
@@ -222,49 +212,6 @@
             this.tb_pics.Name = "tb_pics";
             this.tb_pics.Size = new System.Drawing.Size(244, 30);
             this.tb_pics.TabIndex = 1;
-            // 
-            // dgv_exts
-            // 
-            this.dgv_exts.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgv_exts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv_exts.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.ext,
-            this.view,
-            this.op});
-            this.dgv_exts.Location = new System.Drawing.Point(211, 523);
-            this.dgv_exts.Name = "dgv_exts";
-            this.dgv_exts.RowHeadersVisible = false;
-            this.dgv_exts.RowTemplate.Height = 23;
-            this.dgv_exts.Size = new System.Drawing.Size(327, 184);
-            this.dgv_exts.TabIndex = 0;
-            this.dgv_exts.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_exts_CellClick);
-            // 
-            // ext
-            // 
-            this.ext.HeaderText = "扩展名";
-            this.ext.Name = "ext";
-            // 
-            // view
-            // 
-            this.view.HeaderText = "编辑器";
-            this.view.Items.AddRange(new object[] {
-            "表格",
-            "文档",
-            "图片",
-            "视频",
-            "录音"});
-            this.view.Name = "view";
-            this.view.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.view.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.view.Width = 70;
-            // 
-            // op
-            // 
-            this.op.HeaderText = "操作";
-            this.op.Name = "op";
-            this.op.Width = 60;
             // 
             // groupBox3
             // 
@@ -395,66 +342,14 @@
             this.bt_app_aud.UseVisualStyleBackColor = true;
             this.bt_app_aud.Click += new System.EventHandler(this.bt_app_aud_Click);
             // 
-            // groupBox4
-            // 
-            this.groupBox4.Controls.Add(this.lb_places);
-            this.groupBox4.Location = new System.Drawing.Point(357, 12);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(301, 398);
-            this.groupBox4.TabIndex = 5;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "采录点管理";
-            // 
-            // lb_places
-            // 
-            this.lb_places.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lb_places.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
-            this.lb_places.FormattingEnabled = true;
-            this.lb_places.IntegralHeight = false;
-            this.lb_places.ItemHeight = 24;
-            this.lb_places.Location = new System.Drawing.Point(6, 20);
-            this.lb_places.Name = "lb_places";
-            this.lb_places.Size = new System.Drawing.Size(289, 372);
-            this.lb_places.TabIndex = 0;
-            this.lb_places.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.lb_places_DrawItem);
-            this.lb_places.DoubleClick += new System.EventHandler(this.lb_places_DoubleClick);
-            // 
-            // btn_new
-            // 
-            this.btn_new.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_new.Location = new System.Drawing.Point(357, 416);
-            this.btn_new.Name = "btn_new";
-            this.btn_new.Size = new System.Drawing.Size(29, 29);
-            this.btn_new.TabIndex = 2;
-            this.btn_new.Text = "+";
-            this.btn_new.UseVisualStyleBackColor = true;
-            this.btn_new.Click += new System.EventHandler(this.btn_new_Click);
-            // 
-            // btn_remove
-            // 
-            this.btn_remove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_remove.Location = new System.Drawing.Point(392, 416);
-            this.btn_remove.Name = "btn_remove";
-            this.btn_remove.Size = new System.Drawing.Size(29, 29);
-            this.btn_remove.TabIndex = 2;
-            this.btn_remove.Text = "-";
-            this.btn_remove.UseVisualStyleBackColor = true;
-            this.btn_remove.Click += new System.EventHandler(this.btn_remove_Click);
-            // 
             // Setting
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(670, 459);
-            this.Controls.Add(this.dgv_exts);
-            this.Controls.Add(this.groupBox4);
+            this.ClientSize = new System.Drawing.Size(363, 501);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.btn_remove);
-            this.Controls.Add(this.btn_new);
             this.Controls.Add(this.bt_ok);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
@@ -467,10 +362,8 @@
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgv_exts)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
-            this.groupBox4.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -484,10 +377,6 @@
         private System.Windows.Forms.Button bt_ok;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.DataGridView dgv_exts;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ext;
-        private System.Windows.Forms.DataGridViewComboBoxColumn view;
-        private System.Windows.Forms.DataGridViewButtonColumn op;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.TextBox tb_app_aud;
         private System.Windows.Forms.Button bt_app_aud;
@@ -501,10 +390,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox tb_app_sol;
         private System.Windows.Forms.Button bt_app_sol;
-        private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.ListBox lb_places;
-        private System.Windows.Forms.Button btn_new;
-        private System.Windows.Forms.Button btn_remove;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox tb_xls;
