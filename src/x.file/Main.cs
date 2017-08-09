@@ -388,6 +388,7 @@ namespace X.File
             }
             else
             {
+                tv_dir.Nodes.Clear();
                 cb_places.SelectedIndex = App.cfg.Places.FindIndex(o => o.ID == App.cfg.CpId);
             }
             //else tv_dir.Nodes.Clear();
